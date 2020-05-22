@@ -139,12 +139,33 @@
                                     Trang chủ
                                 </a>
                             </li>
-                            <li class="app-sidebar__heading">Dữ liệu</li>
+                            <li class="app-sidebar__heading">Dữ liệu phòng</li>
                             <li>
-                                <a href="index.html">
-                                    <i class="metismenu-icon pe-7s-rocket"></i>
-                                    Dữ liệu tầng 1 - lầu 2
+                                <a href="#">
+                                    <i class="metismenu-icon pe-7s-menu"></i>
+                                    Phòng họp
+                                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                                 </a>
+                                <ul>
+                                    <li>
+                                        <a href="elements-buttons-standard.html">
+                                            <i class="metismenu-icon"></i>
+                                            Tầng trệt
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="elements-dropdowns.html">
+                                            <i class="metismenu-icon">
+                                            </i>Lầu 1
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="elements-icons.html">
+                                            <i class="metismenu-icon">
+                                            </i>Lầu 3
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </div>
