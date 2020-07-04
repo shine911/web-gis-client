@@ -17,7 +17,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-xs-12 col-md-12 offset-lg-2 col-lg-8">
             <div class="main-card mb-3 card">
                 <div class="card-body">
                     <div class="card-title">Đăng nhập vào hệ thống Web GIS</div>
@@ -25,13 +25,13 @@
                         <div class="form-row">
                             <div class="col-md-12">
                                 <div class="position-relative form-group">
-                                    <label for="exampleEmail11" class="">Email</label>
+                                    <label for="email" class="">Email</label>
                                     <input name="email" id="email" type="email" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="position-relative form-group">
-                                    <label for="exampleEmail11" class="">Mật khẩu</label>
+                                    <label for="password" class="">Mật khẩu</label>
                                     <input name="password" id="password" type="password" class="form-control">
                                 </div>
                             </div>

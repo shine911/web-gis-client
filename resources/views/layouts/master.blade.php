@@ -51,12 +51,17 @@
             </div>
             <div class="app-header__content">
                 <div class="app-header-left">
-                    <div class="search-wrapper">
-                        <div class="input-holder">
-                            <input type="text" class="search-input" placeholder="Type to search">
-                            <button class="search-icon"><span></span></button>
+                    <div class="widget-content p-0">
+                        <div class="widget-content-wrapper">
+                            <div class="widget-content-left  ml-3 header-user-info">
+                                <div class="widget-heading">
+                                    Alina Mclourd
+                                </div>
+                                <div class="widget-subheading">
+                                    VP People Manager
+                                </div>
+                            </div>
                         </div>
-                        <button class="close"></button>
                     </div>
                 </div>
                 <div class="app-header-right">
@@ -76,19 +81,6 @@
                                             <button type="button" tabindex="0" class="dropdown-item">Thoát</button>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="widget-content-left  ml-3 header-user-info">
-                                    <div class="widget-heading">
-                                        Admin
-                                    </div>
-                                    <div class="widget-subheading">
-                                        Adminstrator
-                                    </div>
-                                </div>
-                                <div class="widget-content-right header-user-info ml-3">
-                                    <button type="button" class="btn-shadow p-1 btn btn-primary btn-sm show-toastr-example">
-                                        <i class="fa text-white fa-calendar pr-1 pl-1"></i>
-                                    </button>
                                 </div>
                             </div>
                         </div>
