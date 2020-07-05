@@ -22,7 +22,7 @@
                             <div class="main-card mb-3 card">
                                 <div class="card-body">
                                     <div class="card-title">World Map</div>
-                                    <div id="world-map-gdp" style="width: 100%; height: 500px;"></div>
+                                    <div id="map" style="width: 100%; height: 500px;"></div>
                                 </div>
                             </div>
                         </div>
@@ -68,4 +68,5 @@
                 </div>
             </div>
             <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+            <script src="/assets/openlayer/testmap/openlayer.e31bb0bc.js" />
 @endsection
