@@ -67,6 +67,4 @@
                     </div>
                 </div>
             </div>
-            <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
-            <script src="/assets/openlayer/testmap/openlayer.e31bb0bc.js" />
 @endsection

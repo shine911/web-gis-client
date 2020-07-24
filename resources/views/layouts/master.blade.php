@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>@yield('title')</title>
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" />
 
     <!-- Styles -->
-    <link href="./main.css" rel="stylesheet">
+    <link href="./main.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -135,26 +135,14 @@
                             <li>
                                 <a href="#">
                                     <i class="metismenu-icon pe-7s-menu"></i>
-                                    Phòng họp
+                                    Dữ liệu phòng
                                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                                 </a>
                                 <ul>
                                     <li>
                                         <a href="elements-buttons-standard.html">
                                             <i class="metismenu-icon"></i>
-                                            Tầng trệt
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="elements-dropdowns.html">
-                                            <i class="metismenu-icon">
-                                            </i>Lầu 1
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="elements-icons.html">
-                                            <i class="metismenu-icon">
-                                            </i>Lầu 3
+                                            Khoa Kinh Tế
                                         </a>
                                     </li>
                                 </ul>
@@ -166,7 +154,7 @@
             @yield('content')
         </div>
     </div>
+    
     <script type="text/javascript" src="./assets/scripts/main.js"></script>
 </body>
-
 </html>

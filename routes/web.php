@@ -22,4 +22,5 @@ Route::get('/login', function(){
 Route::get('/home', function(){
     return view('home');
 });
-Route::resource('tang3', 'T3L2Controller');
+
+Route::get('/room', 'Web\RoomViewController@index');

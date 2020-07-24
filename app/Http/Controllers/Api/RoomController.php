@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Room;
 
-class T3L2Controller extends Controller
+class RoomController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +15,11 @@ class T3L2Controller extends Controller
      */
     public function index()
     {
-        return view('home');
+        //Get all list of Room
+        $room = Room::all();
+
+        //return room
+        return response()->json($room);
     }
 
     /**
