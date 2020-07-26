@@ -19,8 +19,7 @@ Route::get('/', function () {
 Route::get('/login', function(){
     return view('login');
 });
-Route::get('/home', function(){
-    return view('home');
-});
+
+Route::get('/home', 'DashboardController@index');
 
 Route::get('/room', 'Web\RoomViewController@index');
