@@ -1,5 +1,8 @@
 <?php
 
+use GuzzleHttp\Psr7\Request;
+use Illuminate\Contracts\Session\Session;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +23,23 @@ Route::get('/login', function(){
     return view('login');
 });
 
-Route::get('/home', 'DashboardController@index');
 
-Route::get('/room', 'Web\RoomViewController@index');
+
+Route::group(['middleware' => 'localization'], function () {
+    Route::get('/home', 'DashboardController@index');
+    Route::get('/room', 'Web\RoomViewController@index');
+    Route::get('/room/detail', 'Web\RoomViewController@detail');
+});
+//i18n Settings
+Route::get('settings/lang/{locale}', function ($locale) {
+    $lang = $locale;
+    $language = config('app.locale');
+    if ($lang == 'en') {
+        $language = 'en';
+    }
+    if ($lang == 'vi') {
+        $language = 'vi';
+    }
+    session()->put('language', $language);
+    return redirect()->back();
+})->name('change-laguage');

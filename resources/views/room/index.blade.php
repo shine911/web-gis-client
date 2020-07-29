@@ -24,7 +24,7 @@
                     <form class="form-inline mb-4 d-flex flex-row-reverse" method="GET" action="/room">
                         <div class="form-group">
                             <input type="text" name="search" class="form-control">
-                            <button class="ml-4 btn btn-primary">Search</button>
+                        <button class="ml-4 btn btn-primary">{{__('message.button.search')}}</button>
                         </div>
                     </form>
                     <div class="table-responsive">
@@ -47,7 +47,7 @@
                                     <td>{{$item->block}}</td>
                                     <td>{{$item->roomcapacity}}</td>
                                     <td>{{$item->managementagencycode}}</td>
-                                    <td><button class="btn btn-primary">Xem thông tin</button></td>
+                                <td><button class="btn btn-primary">{{__('message.button.view_info')}}</button></td>
                                 </tr>
                                 @endforeach
                             </tbody>

@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" />
 
     <!-- Styles -->
-    <link href="./main.css" rel="stylesheet" />
+<link href="{{$app->make('url')->to('/')}}/main.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -71,7 +71,7 @@
                                 <div class="widget-content-left">
                                     <div class="btn-group">
                                         <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                                            <img width="42" class="rounded-circle" src="assets/images/avatars/1.jpg" alt="">
+                                            <img width="42" class="rounded-circle" src="{{$app->make('url')->to('/')}}/assets/images/avatars/1.jpg" alt="">
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         </a>
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
@@ -128,14 +128,14 @@
                             <li>
                                 <a href="/">
                                     <i class="metismenu-icon pe-7s-rocket"></i>
-                                    Trang chủ
+                                    {{__('message.heading_sidebar.home')}}
                                 </a>
                             </li>
-                            <li class="app-sidebar__heading">Dữ liệu phòng</li>
+                        <li class="app-sidebar__heading">{{__('message.heading_sidebar.data_management')}}</li>
                             <li>
                                 <a href="#">
                                     <i class="metismenu-icon pe-7s-menu"></i>
-                                    Dữ liệu phòng
+                                    {{__('message.heading_sidebar.management.room')}}
                                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                                 </a>
                                 <ul>
@@ -159,13 +159,13 @@
                             <div class="app-footer-left">
                                 <ul class="nav">
                                     <li class="nav-item">
-                                        <a href="javascript:void(0);" class="nav-link">
-                                            Footer Link 1
+                                        <a href="{{route('change-laguage', ['vi'])}}" class="nav-link">
+                                            Tiếng việt
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="javascript:void(0);" class="nav-link">
-                                            Footer Link 2
+                                        <a href="{{route('change-laguage', ['en'])}}" class="nav-link">
+                                            English
                                         </a>
                                     </li>
                                 </ul>
@@ -194,6 +194,6 @@
         </div>
     </div>
     
-    <script type="text/javascript" src="./assets/scripts/main.js"></script>
+    <script type="text/javascript" src="{{$app->make('url')->to('/')}}/assets/scripts/main.js"></script>
 </body>
 </html>
