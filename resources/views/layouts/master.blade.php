@@ -12,6 +12,8 @@
 
     <!-- Styles -->
 <link href="{{$app->make('url')->to('/')}}/main.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.4.2/css/ol.css" type="text/css">
+    @yield('link-style')
 </head>
 
 <body>
@@ -193,7 +195,8 @@
             </div>
         </div>
     </div>
-    
+    <script type="text/javascript" src="{{$app->make('url')->to('/')}}/js/app.js"></script>
+
     <script type="text/javascript" src="{{$app->make('url')->to('/')}}/assets/scripts/main.js"></script>
 </body>
 </html>
