@@ -30,6 +30,7 @@ Route::group(['middleware' => 'localization'], function () {
     Route::get('/room', 'Web\RoomViewController@index');
     Route::get('/room/detail', 'Web\RoomViewController@detail')->name('room_detail');
     Route::get('/mapeditor', 'WebMapEditorController@index');
+    Route::get('/tang1_tret', 'Web\Tang1_TretController@index');
 });
 //i18n Settings
 Route::get('settings/lang/{locale}', function ($locale) {

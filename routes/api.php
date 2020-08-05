@@ -19,3 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::middleware('utf-8')->resource('room', 'Api\RoomController');
+Route::resource('tang1_tret', 'Api\MapController');

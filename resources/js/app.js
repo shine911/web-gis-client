@@ -27,6 +27,8 @@ Vue.use(VueLayers)
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('mapeditor-component', require('./components/MapEditorComponent.vue').default);
+Vue.component('mapview-component', require('./components/MapViewComponent').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
