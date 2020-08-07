@@ -43,9 +43,6 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Tên Phòng</th>
-                                    <th>Block</th>
-                                    <th>Sức chứa</th>
-                                    <th>Khoa</th>
                                     <th>Tác vụ</th>
                                 </tr>
                                 </thead>
@@ -53,13 +50,14 @@
                                 @foreach ($data as $item)
                                     <tr>
                                         <th scope="row">{{$item->id}}</th>
-                                        <td><a href="" class="btn btn-primary">{{__('message.button.view_info')}}</a></td>
+                                        <td>{{$item->gid}}</td>
+                                        <td><a href="{{action('Web\Tang1_TretController@detail', ['id'=>$item->id])}}" class="btn btn-primary">{{__('message.button.view_info')}}</a></td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
                             <div class="mt-4">
-
+                                {{$data->links()}}
                             </div>
                         </div>
 

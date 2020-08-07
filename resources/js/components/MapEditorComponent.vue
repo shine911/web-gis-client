@@ -15,11 +15,11 @@
         <div class="col-lg-12 map-css">
             <vl-map class="map" ref="map" @mounted="onMapMounted" :load-tiles-while-animating="true" :load-tiles-while-interacting="true">
                 <vl-view :zoom.sync="zoom" :center.sync="center" :rotation.sync="rotation"></vl-view>
-                <vl-layer-tile class="base-layer">
+                <vl-layer-tile class="base-layer" :z-index="0">
                     <vl-source-osm></vl-source-osm>
                 </vl-layer-tile>
 
-                <vl-layer-vector class="source-layer">
+                <vl-layer-vector class="source-layer" :z-index="1">
                     <vl-source-vector ident="draw-target" :features.sync="features"></vl-source-vector>
                     <vl-style-box>
                         <vl-style-stroke color="green" :width="3"></vl-style-stroke>
@@ -60,9 +60,10 @@ export default {
             selectedFeatures: [],
         }
     },
+    props: {'src': String},
     mounted() {
         this.loading = true
-        axios.get('http://localhost:8600/geoserver/ctu/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ctu:tang1_tret&outputFormat=application/json&featureid=tang1_tret.1')
+        axios.get(this.src)
             .then(res => {
                 this.features = res.data.features
                 this.loading = false
@@ -73,7 +74,8 @@ export default {
             //Alert
             let choose = confirm('We will saving your data?')
             if(choose){
-                let geom = JSON.stringify([this.features[0].geometry.coordinates])
+                let geom = JSON.stringify(this.features[0].geometry.coordinates)
+                console.log(geom)
                 axios.put("/api/tang1_tret/1", {geom: geom}).then(res=>alert('Your map saved'))
             }
             return false

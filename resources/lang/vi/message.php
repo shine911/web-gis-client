@@ -22,6 +22,9 @@ return [
 		'campuscode' => 'Campuscode',
 		'usingpurposecode' => 'Usingpurposecode',
 	],
+    'map' => [
+        'edit_title' => 'Chỉnh sửa bản đồ của :name',
+    ],
 	'button' => [
 		'search' => 'Tìm kiếm',
 		'view_info' => 'Xem thông tin',

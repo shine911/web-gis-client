@@ -28,6 +28,7 @@ Vue.use(VueLayers)
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('mapeditor-component', require('./components/MapEditorComponent.vue').default);
 Vue.component('mapview-component', require('./components/MapViewComponent').default);
+Vue.component('mapglobalview-component', require('./components/MapGlobalViewComponent').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

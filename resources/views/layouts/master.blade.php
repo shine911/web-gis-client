@@ -147,6 +147,12 @@
                                                 Room
                                             </a>
                                         </li>
+                                    <li>
+                                        <a href="/tang1_tret">
+                                            <i class="metismenu-icon"></i>
+                                            Tang 1_Tret
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>

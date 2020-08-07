@@ -3,11 +3,11 @@
         <div class="col-lg-12 map-css">
             <vl-map class="map" ref="map" @mounted="onMapMounted" :load-tiles-while-animating="true" :load-tiles-while-interacting="true">
                 <vl-view :zoom.sync="zoom" :center.sync="center" :rotation.sync="rotation"></vl-view>
-                <vl-layer-tile class="base-layer">
+                <vl-layer-tile class="base-layer" :z-index="0">
                     <vl-source-osm></vl-source-osm>
                 </vl-layer-tile>
 
-                <vl-layer-vector class="source-layer">
+                <vl-layer-vector class="source-layer" :z-index="1">
                     <vl-source-vector ident="draw-target" :features.sync="features"></vl-source-vector>
                     <vl-style-box>
                         <vl-style-stroke color="green" :width="3"></vl-style-stroke>
@@ -73,8 +73,4 @@ export default {
     .map
         width: 100%
         height: 300px
-        .source-layer
-            z-index: 1
-        .base-layer
-            z-index: -1000
 </style>
