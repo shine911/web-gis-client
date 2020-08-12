@@ -76,7 +76,9 @@ export default {
             if(choose){
                 let geom = JSON.stringify(this.features[0].geometry.coordinates)
                 console.log(geom)
-                axios.put("/api/tang1_tret/1", {geom: geom}).then(res=>alert('Your map saved'))
+                axios.put("/api/tang1_tret/1", {geom: geom}).then(res=>{alert('Your map saved')
+                console.log(res.data)})
+                
             }
             return false
         },

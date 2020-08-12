@@ -3,6 +3,7 @@
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +16,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Auth::routes([
+    'reset' => false,
+    'verify' => false,
+    'register' => false,
+ ]);
+ 
 Route::get('/', function () {
     return view('index');
 });
@@ -26,7 +32,7 @@ Route::get('/login', function(){
 
 
 Route::group(['middleware' => 'localization'], function () {
-    Route::get('/home', 'DashboardController@index');
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     Route::get('/room', 'Web\RoomViewController@index');
     Route::get('/room/detail', 'Web\RoomViewController@detail')->name('room_detail');
     Route::get('/mapeditor', 'WebMapEditorController@index');
@@ -46,3 +52,7 @@ Route::get('settings/lang/{locale}', function ($locale) {
     session()->put('language', $language);
     return redirect()->back();
 })->name('change-laguage');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -84,6 +84,12 @@ class MapController extends Controller
         $linestring_array = array();
         $polygon_array = array();
         //Point to Multipolygon Alg by shine911
+        /**
+         * Convert point to multipolygon
+         * Input: Coordinates from client
+         * Process: Point -> LineStrings -> Polygon -> Multipolygon
+         * Output: Multipolygon type
+         */
         foreach ($geo_array as $polygon){
             foreach ($polygon as $linestring){
                 foreach ($linestring as $pointValue){

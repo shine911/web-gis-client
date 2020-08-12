@@ -33,7 +33,8 @@ return [
 		'home' => 'Trang chủ',
 		'data_management' => 'Quản lí dữ liệu',
 		'management' => [
-			'room' => 'Quản lí dữ liệu phòng',
+			'room' => 'Hệ thống phòng',
+			'water_supply_and_drainage' => 'Hệ thống cấp thoát nước',
 		],
 	],
     'navbar' => [

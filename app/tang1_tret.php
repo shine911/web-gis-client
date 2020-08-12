@@ -18,7 +18,7 @@ class tang1_tret extends Model
     protected $postgisTypes = [
         'geom' => [
             'geomtype' => 'geometry',
-            'srid' => 27700
+            'srid' => 0 //Default map is srid 0 need to be convert to 3857
         ]
     ];
 }
