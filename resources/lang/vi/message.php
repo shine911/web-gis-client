@@ -36,4 +36,9 @@ return [
 			'room' => 'Quản lí dữ liệu phòng',
 		],
 	],
+    'navbar' => [
+		'account_info' => 'Thông tin tài khoản',
+		'setting' => 'Cài đặt',
+		'exit' => 'Thoát',
+	],
 ];
