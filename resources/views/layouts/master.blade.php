@@ -77,10 +77,10 @@
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         </a>
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
-                                            <button type="button" tabindex="0" class="dropdown-item">Thông tin tài khoản</button>
-                                            <button type="button" tabindex="0" class="dropdown-item">Cài đặt</button>
+                                            <button type="button" tabindex="0" class="dropdown-item">{{__('message.navbar.account_info')}}</button>
+                                            <button type="button" tabindex="0" class="dropdown-item">{{__('message.navbar.setting')}}</button>
                                             <div tabindex="-1" class="dropdown-divider"></div>
-                                            <button type="button" tabindex="0" class="dropdown-item">Thoát</button>
+                                            <button type="button" tabindex="0" class="dropdown-item">{{__('message.navbar.exit')}}</button>
                                         </div>
                                     </div>
                                 </div>
