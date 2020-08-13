@@ -31,9 +31,9 @@
             <div class="main-card mb-3 card">
                 <div class="card-body">
                     <h5 class="card-title">Thông tin sơ đồ phòng học</h5>
-                    <form class="form-inline mb-4 d-flex flex-row-reverse" method="GET" action="/room">
+                    <form class="form-inline mb-4 d-flex flex-row-reverse" method="GET" action="">
                         <div class="form-group">
-                            <input type="text" name="search" class="form-control">
+                        <input type="text" value="{{$search}}" name="search" class="form-control">
                             <button class="ml-4 btn btn-primary">{{__('message.button.search')}}</button>
                         </div>
                     </form>
@@ -65,7 +65,7 @@
                             </tbody>
                         </table>
                         <div class="mt-4">
-                            {{$data->links()}}
+                            {{$data->appends(['search' => $search])->links()}}
                         </div>
                     </div>
 

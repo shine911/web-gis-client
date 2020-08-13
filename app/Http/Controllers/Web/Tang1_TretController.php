@@ -23,17 +23,24 @@ class Tang1_TretController extends Controller
         $this->appname = config('app.geoserver.appname', 'geoserver');
         $this->workspace = config('app.geoserver.workspace', 'ctu');
     }
-    public function index(){
+    public function index(Request $request){
         $localhost = $this->localhost;
         $port = $this->port;
         $appname = $this->appname;
         $workspace = $this->workspace;
         $layer = 'room';
         //format localhost:port/appname
+        $search = $request->has('search') ? $request->get('search') : '';
         $localhost = "$localhost:$port/$appname";
         $url = "http://$localhost/$workspace/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=$workspace:$layer&outputFormat=application/json";
-        $tang1_tret = tang1_tret::orderBy("gid")->paginate(10);
-        $data = ["data"=>$tang1_tret, "url"=>$url];
+        $tang1_tret = tang1_tret::where('roomcode', 'LIKE', '%'.$search.'%')->orderBy("id")->paginate(10);
+        $filter = "&featureid=";
+        foreach($tang1_tret as $room){
+            $filter = $filter."$layer.$room->id,";
+            $url = "http://$localhost/$workspace/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=$workspace:$layer&outputFormat=application/json$filter";
+
+        }
+        $data = ["data"=>$tang1_tret, "url"=>$url, "search" => $search];
         return view("tang1_tret/index", $data);
     }
 
