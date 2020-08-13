@@ -44,22 +44,8 @@
                         <div class="widget-content p-0">
                             <div class="widget-content-wrapper">
                                 <div class="widget-content-left">
-<<<<<<< Updated upstream
-                                    <div class="btn-group">
-                                        <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                                            <img width="42" class="rounded-circle" src="assets/images/avatars/1.jpg" alt="">
-                                            <i class="fa fa-angle-down ml-2 opacity-8"></i>
-                                        </a>
-                                        <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
-                                            <button type="button" tabindex="0" class="dropdown-item">{{__('message.navbar.account_info')}}</button>
-                                            <button type="button" tabindex="0" class="dropdown-item">{{__('message.navbar.setting')}}</button>
-                                            <div tabindex="-1" class="dropdown-divider"></div>
-                                            <button type="button" tabindex="0" class="dropdown-item">{{__('message.navbar.exit')}}</button>
-                                        </div>
-                                    </div>
-=======
+                                        
                                 <a href="{{route('dashboard')}}">Login</a>
->>>>>>> Stashed changes
                                 </div>
                             </div>
                         </div>

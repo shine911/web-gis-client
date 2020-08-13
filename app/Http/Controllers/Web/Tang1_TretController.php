@@ -18,26 +18,40 @@ class Tang1_TretController extends Controller
 
     public function __construct()
     {
-        $this->port = config('app.geoserver.port',  8888);
-        $this->localhost = config('app.geoserver.hostname');
+        $this->port = config('app.geoserver.port', 8600 );
+        $this->localhost = config('app.geoserver.hostname', 'localhost');
         $this->appname = config('app.geoserver.appname', 'geoserver');
         $this->workspace = config('app.geoserver.workspace', 'ctu');
     }
     public function index(){
-        $tang1_tret = tang1_tret::orderBy("gid")->paginate(10);
-        $data = ["data"=>$tang1_tret];
-        return view("tang1_tret/index", $data);
-    }
-
-    public function detail($id){
         $localhost = $this->localhost;
         $port = $this->port;
         $appname = $this->appname;
         $workspace = $this->workspace;
-        $layer = 'tang1_tret';
+        $layer = 'room';
+        //format localhost:port/appname
+        $localhost = "$localhost:$port/$appname";
+        $url = "http://$localhost/$workspace/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=$workspace:$layer&outputFormat=application/json";
+        $tang1_tret = tang1_tret::orderBy("gid")->paginate(10);
+        $data = ["data"=>$tang1_tret, "url"=>$url];
+        return view("tang1_tret/index", $data);
+    }
+
+    public function detail($id){
+        $room = tang1_tret::where('id', '=', $id)->firstOrFail();
+        $localhost = $this->localhost;
+        $port = $this->port;
+        $appname = $this->appname;
+        $workspace = $this->workspace;
+        $layer = 'room';
+        //format localhost:port/appname
+        $localhost = "$localhost:$port/$appname";
         $filter = "$layer.$id";
         $url = "http://$localhost/$workspace/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=$workspace:$layer&outputFormat=application/json&featureid=$filter";
-        $data = ["url"=>$url, "name"=>$layer.$id];
+        
+        //Get room information
+        
+        $data = ["url"=>$url, "name"=>$layer.$id, "id"=>$id, "data" => $room];
         return view('tang1_tret/detail', $data);
     }
 

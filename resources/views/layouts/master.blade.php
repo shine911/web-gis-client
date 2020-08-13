@@ -156,6 +156,27 @@
                                     <li>
                                         <a href="/tang1_tret">
                                             <i class="metismenu-icon"></i>
+                                            {{__('message.heading_sidebar.management.floor', ['num'=>1])}}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="metismenu-icon pe-7s-drop"></i>
+                                    {{__('message.heading_sidebar.management.water_supply_and_drainage')}}
+                                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                </a>
+                                <ul>
+                                        <li>
+                                            <a href="/room">
+                                                <i class="metismenu-icon"></i>
+                                                Room
+                                            </a>
+                                        </li>
+                                    <li>
+                                        <a href="/tang1_tret">
+                                            <i class="metismenu-icon"></i>
                                             Tang 1_Tret
                                         </a>
                                     </li>

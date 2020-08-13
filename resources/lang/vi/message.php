@@ -7,7 +7,7 @@ return [
 		'name' => 'Tên phòng',
 		'block' => 'Block',
 		'capacity' => 'Sức chứa',
-		'department' => 'Khoa',
+		'department' => 'Đơn vị',
 		'action' => 'Tác vụ',
 		'length' => 'Chiều dài',
 		'width' => 'Chiều rộng',
@@ -28,13 +28,15 @@ return [
 	'button' => [
 		'search' => 'Tìm kiếm',
 		'view_info' => 'Xem thông tin',
+		'save' => 'Lưu'
 	],
 	'heading_sidebar' => [
 		'home' => 'Trang chủ',
 		'data_management' => 'Quản lí dữ liệu',
 		'management' => [
 			'room' => 'Hệ thống phòng',
-			'water_supply_and_drainage' => 'Hệ thống cấp thoát nước',
+			'water_supply_and_drainage' => 'Hệ thống cấp nước',
+			'floor' => 'Tầng :num'
 		],
 	],
     'navbar' => [

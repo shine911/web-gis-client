@@ -60,7 +60,7 @@ export default {
             selectedFeatures: [],
         }
     },
-    props: {'src': String},
+    props: {'src': String, 'id': Number},
     mounted() {
         this.loading = true
         axios.get(this.src)
@@ -75,10 +75,8 @@ export default {
             let choose = confirm('We will saving your data?')
             if(choose){
                 let geom = JSON.stringify(this.features[0].geometry.coordinates)
-                console.log(geom)
-                axios.put("/api/tang1_tret/1", {geom: geom}).then(res=>{alert('Your map saved')
+                axios.put("/api/tang1_tret/"+this.id, {geom: geom}).then(res=>{alert('Your map saved')
                 console.log(res.data)})
-                
             }
             return false
         },
@@ -107,15 +105,8 @@ export default {
     }
 }
 </script>
-
-<style lang="sass">
-.map-css
-    position: relative
-    .map
-        width: 100%
-        height: 300px
-        .source-layer
-            z-index: 1
-        .base-layer
-            z-index: -1000
+<style scoped>
+.map{
+    height: 500px;
+}
 </style>

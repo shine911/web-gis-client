@@ -7,7 +7,7 @@ use MStaack\LaravelPostgis\Eloquent\PostgisTrait;
 class tang1_tret extends Model
 {
     public $timestamps = false;
-    protected $table = "tang1_tret";
+    protected $table = "room";
     //
     use PostgisTrait;
 

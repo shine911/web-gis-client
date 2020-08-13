@@ -228,5 +228,15 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
-
+    
+    /** 
+     * ----------------------------------------------------------------
+     * GEOSERVER
+     * ----------------------------------------------------------------
+    */
+    'geoserver'=>[
+        'hostname' => env('GEO_HOSTNAME', 'localhost'),
+        'port' => env('GEO_PORT', 8888),
+        'workspace' => env('GEO_WORKSPACE', 'ctu'),
+    ],
 ];

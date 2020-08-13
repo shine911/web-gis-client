@@ -42,9 +42,10 @@ export default {
             feature: [],
         }
     },
+    props: {src: String},
     mounted() {
         this.loading = true
-        axios.get('http://localhost:8600/geoserver/ctu/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ctu:tang1_tret&outputFormat=application/json')
+        axios.get(this.src)
             .then(res => {
                 this.features = res.data.features
                 this.loading = false
@@ -66,11 +67,8 @@ export default {
     }
 }
 </script>
-
-<style lang="sass">
-.map-css
-    position: relative
-    .map
-        width: 100%
-        height: 300px
+<style scoped>
+.map{
+    height: 500px;
+}
 </style>
