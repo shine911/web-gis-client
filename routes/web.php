@@ -1,5 +1,6 @@
 <?php
 
+use App\FeaturesConfigUrl;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\App;
@@ -23,7 +24,8 @@ Auth::routes([
  ]);
  
 Route::get('/', function () {
-    return view('index');
+    $data = ['url' => FeaturesConfigUrl::all() ];
+    return view('index', $data);
 });
 Route::get('/login', function(){
     return view('login');
