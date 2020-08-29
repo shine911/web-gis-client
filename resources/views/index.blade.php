@@ -22,9 +22,9 @@
             <div class="col-md-12">
                 <div class="main-card mb-3 card">
                     <div class="card-body">
-                        <div class="card-title">World Map</div>
+                        <div class="card-title">CTU MAP</div>
                         <div id="app">
-                            <mapglobalview-component></mapglobalview-component>
+                        <mapglobalview-component url='@json($url)'></mapglobalview-component>
                         </div>
                     </div>
                 </div>
