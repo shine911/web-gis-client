@@ -14,7 +14,7 @@ return [
 		'area' => 'Chu vi',
 		'roomnamevi' => 'Tên tiếng Việt',
 		'roomnameen' => 'Tên tiếng Anh',
-		'buildingcode' => 'Khu',
+		'buildingcode' => 'Toà nhà',
 		'other1' => 'Chú thích 1',
 		'other2' => 'Chú thích 2',
 		'floor' => 'Floor',

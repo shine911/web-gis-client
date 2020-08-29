@@ -42,11 +42,11 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Tên Phòng</th>
-                                    <th>Khoa trực thuộc</th>
-                                    <th>Sức chứa</th>
-                                    <th>Toà nhà</th>
-                                    <th>Tác vụ</th>
+                                    <th>{{__('message.room.name')}}</th>
+                                <th>{{__('message.room.department')}}</th>
+                                    <th>{{__('message.room.capacity')}}</th>
+                                    <th>{{__('message.room.buildingcode')}}</th>
+                                    <th>{{__('message.room.action')}}</th>
                                 </tr>
                             </thead>
                             <tbody>

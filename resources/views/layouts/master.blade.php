@@ -147,12 +147,6 @@
                                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                                 </a>
                                 <ul>
-                                        <li>
-                                            <a href="/room">
-                                                <i class="metismenu-icon"></i>
-                                                Room
-                                            </a>
-                                        </li>
                                     <li>
                                         <a href="/tang1_tret">
                                             <i class="metismenu-icon"></i>
