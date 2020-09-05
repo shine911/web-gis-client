@@ -10,10 +10,17 @@
 window.Vue = require('vue');
 
 /** VueLayer Module */
-import VueLayers from 'vuelayers'
-import 'vuelayers/lib/style.css' // needs css-loader
+import VueLayers from 'vuelayers';
+import 'vuelayers/lib/style.css'; // needs css-loader
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
 
-Vue.use(VueLayers)
+Vue.use(VueLayers);
+
+// Install BootstrapVue
+Vue.use(BootstrapVue);
+// Optionally install the BootstrapVue icon components plugin
+Vue.use(IconsPlugin);
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -25,11 +32,11 @@ Vue.use(VueLayers)
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+//Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('mapeditor-component', require('./components/MapEditorComponent.vue').default);
 Vue.component('mapview-component', require('./components/MapViewComponent').default);
 Vue.component('mapglobalview-component', require('./components/MapGlobalViewComponent').default);
-
+Vue.component('floordata-component', require('./components/FloorDataComponent').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

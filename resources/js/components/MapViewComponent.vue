@@ -14,9 +14,7 @@
                         <vl-style-fill color="rgba(255,255,255,0.5)"></vl-style-fill>
                     </vl-style-box>
                 </vl-layer-vector>
-                <p v-if="loading">
-                    Loading map, please wait...
-                </p>
+                <b-spinner v-if="loading"></b-spinner>
 
             </vl-map>
 

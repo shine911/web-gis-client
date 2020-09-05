@@ -60,7 +60,7 @@ export default {
             selectedFeatures: [],
         }
     },
-    props: {'src': String, 'id': Number},
+    props: {'src': String, 'id': Number, 'floor': Number},
     mounted() {
         this.loading = true
         axios.get(this.src)
@@ -75,8 +75,9 @@ export default {
             let choose = confirm('We will saving your data?')
             if(choose){
                 let geom = JSON.stringify(this.features[0].geometry.coordinates)
-                axios.put("/api/tang1_tret/"+this.id, {geom: geom}).then(res=>{alert('Your map saved')
-                console.log(res.data)})
+                axios.put("/api/room/"+this.id, 
+                {geom: geom, floor: this.floor})
+                .then(res=>{alert('Your map saved')});
             }
             return false
         },

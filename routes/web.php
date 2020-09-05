@@ -38,8 +38,8 @@ Route::group(['middleware' => 'localization'], function () {
     Route::get('/room', 'Web\RoomViewController@index');
     Route::get('/room/detail', 'Web\RoomViewController@detail')->name('room_detail');
     Route::get('/mapeditor', 'WebMapEditorController@index');
-    Route::get('/tang1_tret', 'Web\Tang1_TretController@index');
-    Route::get('/tang1_tret/detail/{id}', 'Web\Tang1_TretController@detail');
+    Route::get('/floors/{floor}', 'Web\RoomsController@index');
+    Route::get('/floors/{floor}/detail/{id}', 'Web\RoomsController@detail')->name('room.show');
 });
 //i18n Settings
 Route::get('settings/lang/{locale}', function ($locale) {
