@@ -22,6 +22,7 @@
             <div class="main-card mb-3 card">
                 <div class="card-body">
                     <h5 class="card-title">Thông tin phòng học</h5>
+                    <!--
                     <form action="/api/room/{{$data->id}}" class="" method="POST">
                         @method('put')
                         @csrf
@@ -111,10 +112,14 @@
                             </div>
                         </div>
                     </form>
+                    -->
+                    <div id="app">
+                    <floordata-component :data="{{$data}}" url="{{$url}}"></floordata-component>
+                    </div>
                 </div>
             </div>
         </div>
-
+        <!--
         <div class="col-md-12">
             <div class="main-card mb-3 card">
                 <div class="card-body">
@@ -125,6 +130,7 @@
                 </div>
             </div>
         </div>
+        -->
     </div>
 </div>
 

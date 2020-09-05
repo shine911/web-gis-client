@@ -16,7 +16,7 @@ class RoomsController extends Controller
         $floorObj = FeaturesConfigUrl::find($floor)->first();
         
         $search = $request->has('search') ? $request->get('search') : '';
-        $room = Room::where('floor', '=', $floor)->paginate(10);
+        $room = Room::where('floor', '=', $floor)->orderBy('id')->paginate(10);
 
         $data = ["floor"=>$floorObj, "search"=>$search, "data"=>$room];
 

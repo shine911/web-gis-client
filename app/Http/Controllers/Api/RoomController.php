@@ -81,11 +81,11 @@ class RoomController extends Controller
     public function update(Request $request, $id)
     {
         //
-                //TODO: Store value in here
+        //TODO: Store value in here
         //Input from user
-        $coordinates = $request->has("geom")?$request->get("geom"):"";
-        $floor = $request->has("floor")?$request->get('floor'):"";
-        $features = Room::where([['floor','=',$floor], ["id", "=", $id]])->firstOrFail();
+        $formData = $request->has("data")?$request->get("data"):"";
+        $coordinates = $formData["geom"];
+        $features = Room::where([['floor','=',$formData["floor"]], ["id", "=", $id]])->firstOrFail();
 
         /**
          * If you see coordinates from Vue client then we will update geom in database
@@ -114,26 +114,25 @@ class RoomController extends Controller
                 array_push($polygon_array, new Polygon($linestring_array));
             }
             $features->geom = new MultiPolygon($polygon_array);
-            $features->save();
-            return response()->json($features->geom);
         }
 
         //Other in put from user
-        $roomid = $request->has('id')?$request->get('id'):response()->json('no', 500);
-        $roomcode = $request->has('roomcode')?$request->get('roomcode'):"";
-        $roomVi = $request->has('roomnamevi')?$request->get('roomnamevi'):"";
-        $roomEn = $request->has('roomnameen')?$request->get('roomnameen'):"";
-        $building = $request->has('buildingcode')?$request->get('buildingcode'):"";
-        $block = $request->has('block')?$request->get('block'):"";
-        $floor = $request->has('floor')?$request->get('floor'):"";
-        $campusCode = $request->has('campuscode')?$request->get('campuscode'):"";
-        $zoneCode = $request->has('zonecode')?$request->get('zonecode'):"";;
-        $using = $request->has('usingpurposecode')?$request->get('usingpurposecode'):"";
-        $length = $request->has('length')?$request->get('length'):response()->json('no', 500);
-        $with = $request->has('width')?$request->get('width'):response()->json('no', 500);
-        $area = $request->has('area')?$request->get('area'):response()->json('no', 500);
-        $capacity = $request->has('roomcapacity')?$request->get('roomcapacity'):response()->json('no', 500);
-        $mAgencyCode = $request->has('managementagencycode')?$request->get('managementagencycode'):response()->json('no', 500);
+        //$roomid = $formData["id"];
+        $roomcode = $formData["roomcode"];
+        $roomVi = $formData["roomnamevi"];
+        $roomEn = $formData["roomnameen"];
+        $building = $formData["buildingcode"];
+        $block = $formData["block"];
+        $floor = $formData["floor"];
+        $campusCode = $formData["campuscode"];
+        $zoneCode = $formData["zonecode"];
+        $using = $formData["usingpurposecode"];
+        $length = $formData["length"];
+        $with = $formData["width"];
+        $area = $formData["area"];
+        $capacity = $formData["roomcapacity"];
+        $mAgencyCode = $formData["managementagencycode"];
+        $note = $formData["note"];
 
         //$features->id = $id;
         $features->roomcode = $roomcode;
@@ -150,9 +149,10 @@ class RoomController extends Controller
         $features->roomcapacity = $capacity;
         $features->usingpurposecode = $using;
         $features->managementagencycode = $mAgencyCode;
+        $features->note = $note;
         $features->save();
-        return redirect()->route('room.show', ['floor' => $floor, 'id'=>$id]);
-        //return response()->json($features->geom);
+        //return redirect()->route('room.show', ['floor' => $floor, 'id'=>$id]);
+        return response()->json("Saved!", 200);
     }
 
     /**
