@@ -27,6 +27,7 @@ Route::get('/', function () {
     $data = ['url' => FeaturesConfigUrl::all() ];
     return view('index', $data);
 });
+
 Route::get('/login', function(){
     return view('login');
 });
@@ -35,9 +36,6 @@ Route::get('/login', function(){
 
 Route::group(['middleware' => 'localization'], function () {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-    Route::get('/room', 'Web\RoomViewController@index');
-    Route::get('/room/detail', 'Web\RoomViewController@detail')->name('room_detail');
-    Route::get('/mapeditor', 'WebMapEditorController@index');
     Route::get('/floors/{floor}', 'Web\RoomsController@index');
     Route::get('/floors/{floor}/detail/{id}', 'Web\RoomsController@detail')->name('room.show');
 });
