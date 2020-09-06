@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master', ['floors'=>$floors])
 @section('title', 'Web GIS Client')
 @section('content')
     <div class="app-main__inner">

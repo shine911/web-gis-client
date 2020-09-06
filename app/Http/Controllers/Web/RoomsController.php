@@ -14,11 +14,12 @@ class RoomsController extends Controller
     public function index(Request $request, $floor){
         //Get floor Url
         $floorObj = FeaturesConfigUrl::find($floor)->first();
+        $floors = FeaturesConfigUrl::all();
         
         $search = $request->has('search') ? $request->get('search') : '';
         $room = Room::where('floor', '=', $floor)->orderBy('id')->paginate(10);
 
-        $data = ["floor"=>$floorObj, "search"=>$search, "data"=>$room];
+        $data = ["floor"=>$floorObj, "search"=>$search, "data"=>$room, "floors"=>$floors];
 
         return view("floor/index", $data);
     }
@@ -42,10 +43,12 @@ class RoomsController extends Controller
         
         return view('tang1_tret/detail', $data);
         */
+
+        $floors = FeaturesConfigUrl::all();
         $room = Room::where([['floor', '=', $floor], ['id', '=', $id]])->firstOrFail();
         $floor = FeaturesConfigUrl::where('id', '=', $floor)->first();
         $url = $floor->url."&featureid=$id";
-        $data = ['floor' => $floor, 'data'=>$room, 'url' => $url];
+        $data = ['floor' => $floor, 'data'=>$room, 'url' => $url, "floors"=>$floors];
         return view('floor/detail', $data);
     }
 

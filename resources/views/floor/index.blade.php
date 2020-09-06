@@ -1,5 +1,5 @@
-@extends('layouts.master')
-@section('title', 'Dashboard')
+@extends('layouts.master', ['floors' => $floors])
+@section('title', 'Du lieu phong')
 @section('content')
 <div class="app-main__inner">
     <div class="app-page-title">
@@ -54,8 +54,8 @@
                                 @foreach ($data as $item)
                                 <tr>
                                     <th scope="row">{{$item->id}}</th>
-                                    <td>{{$item->roomcode}}</td>
                                     <td>{{$item->roomnamevi}}</td>
+                                    <td>{{$item->managementagencycode}}</td>
                                     <td>{{$item->roomcapacity}}</td>
                                     <td>{{$item->buildingcode}}</td>
 

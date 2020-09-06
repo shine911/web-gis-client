@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\FeaturesConfigUrl;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     //index
     public function index(){
-
-        return view('home2');
+        $floors = FeaturesConfigUrl::all();
+        $data = ["floors"=>$floors];
+        return view('home2', $data);
     }
 }

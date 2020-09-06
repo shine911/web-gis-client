@@ -87,7 +87,7 @@ class RoomController extends Controller
         $coordinates = $formData["geom"];
         $features = Room::where([['floor','=',$formData["floor"]], ["id", "=", $id]])->firstOrFail();
 
-        /**
+        /*
          * If you see coordinates from Vue client then we will update geom in database
          * Separate update geom data and text data
          */

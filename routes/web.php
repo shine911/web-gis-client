@@ -36,7 +36,7 @@ Route::get('/login', function(){
 
 Route::group(['middleware' => 'localization'], function () {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-    Route::get('/floors/{floor}', 'Web\RoomsController@index');
+    Route::get('/floors/{floor}', 'Web\RoomsController@index')->name('floor.show');
     Route::get('/floors/{floor}/detail/{id}', 'Web\RoomsController@detail')->name('room.show');
 });
 //i18n Settings
