@@ -8,25 +8,35 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.2.5",
-        "adldap2/adldap2-laravel": "^6.1",
-        "bosnadev/database": "^0.20.0",
+        "php": "^7.3",
+        "adldap2/adldap2-laravel": "^v6.1.2",
+        "bosnadev/database": "master",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^6.3",
-        "laravel/framework": "^7.0",
+        "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
-        "laravel/ui": "^2.1",
-        "mstaack/laravel-postgis": "^5.0",
-        "ramsey/uuid": "3.x"
+        "laravel/ui": "^3.0",
+        "mstaack/laravel-postgis": "master",
+        "ramsey/uuid": "^4.1"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
         "fzaninotto/faker": "^1.9.1",
         "mockery/mockery": "^1.3.1",
         "nunomaduro/collision": "^5.0",
-        "phpunit/phpunit": "^8.5"
+        "phpunit/phpunit": "^9.0"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "https://github.com/gbuckingham89/database"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/gbuckingham89/laravel-postgis"
+        }
+    ],
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
