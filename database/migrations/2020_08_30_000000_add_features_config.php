@@ -13,11 +13,14 @@ class AddFeaturesConfig extends Migration
      */
     public function up()
     {
-        Schema::create('features_config', function (Blueprint $table) {
+        Schema::create('layers', function (Blueprint $table) {
             //
             $table->increments('id');
-            $table->string('feature_name');
+            $table->string('layer_name');
+            //type: 1 Floor, type: 2 - Water, 3 - Electric
+            $table->integer('layer_type');
             $table->string('url');
+            $table->boolean('user_hide');
             $table->timestamps();
         });
     }
@@ -30,7 +33,6 @@ class AddFeaturesConfig extends Migration
     public function down()
     {
         Schema::table('features_config', function (Blueprint $table) {
-            //
             Schema::drop('features_config');
         });
     }

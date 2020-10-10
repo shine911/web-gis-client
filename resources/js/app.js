@@ -33,6 +33,7 @@ Vue.use(IconsPlugin);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('sports-grounds', require('./components/SportsGroundsViewComponent.vue').default);
 Vue.component('mapeditor-component', require('./components/MapEditorComponent.vue').default);
 Vue.component('mapview-component', require('./components/MapViewComponent').default);
 Vue.component('mapglobalview-component', require('./components/MapGlobalViewComponent').default);

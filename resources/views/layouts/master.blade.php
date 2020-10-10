@@ -151,7 +151,7 @@
                                     <li>
                                     <a href="{{route('floor.show', ['floor'=>$floor->id])}}">
                                             <i class="metismenu-icon"></i>
-                                            {{$floor->feature_name}}
+                                            {{$floor->layer_name}}
                                         </a>
                                     </li>
                                     @endforeach

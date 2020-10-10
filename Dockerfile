@@ -21,20 +21,19 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd \
         --with-freetype \
         --with-jpeg
-# Copy existing application directory permissions
-# COPY --chown=www:www . /var/www
+
 # Add user for laravel application
-RUN groupadd -g 1000 www
-RUN useradd -u 1000 -ms /bin/bash -g www www
+# RUN groupadd -g 1000 www
+# RUN useradd -u 1000 -ms /bin/bash -g www www
 
 # Copy existing application directory contents
-COPY . /var/www
+# COPY . /var/www
 
 # Copy existing application directory permissions
-COPY --chown=www:www . /var/www
+# COPY --chown=www:www . /var/www
 
 # Change current user to www
-USER www
+# USER www
 
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000

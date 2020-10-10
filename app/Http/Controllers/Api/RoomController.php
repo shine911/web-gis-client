@@ -20,7 +20,7 @@ class RoomController extends Controller
     public function index(Request $request)
     {
         $floor = $request->has('floor')?$request->get('floor'):1;
-        
+
         //Get all list of Room
         $room = Room::where('floor', '=', $floor)->paginate(10);
 
@@ -164,5 +164,8 @@ class RoomController extends Controller
     public function destroy($id)
     {
         //
+        $feature = Room::where("id", "=", $id)->firstOrFail();
+        $feature->delete();
+        return response()->json("Deleted!", 200);
     }
 }

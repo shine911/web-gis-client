@@ -24,6 +24,7 @@ return [
 	],
     'map' => [
         'edit_title' => 'Chỉnh sửa bản đồ của :name',
+        'title' => 'Bản đồ trường ĐHCT',
     ],
 	'button' => [
 		'search' => 'Tìm kiếm',
