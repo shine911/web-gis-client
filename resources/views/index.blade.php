@@ -24,22 +24,13 @@
                     <div class="card-body">
                         <div class="card-title">{{__("message.map.title")}}</div>
                         <ul class="nav nav-tabs">
-                            <li class="nav-item"><a class="active nav-link" data-toggle="tab" href="#default">Bản đồ CTU</a></li>
-                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#menu1">Sân Chơi</a></li>
-                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#menu2">Tìm đường đi</a></li>
+                            <li class="nav-item"><a href="{{route('index')}}" class="active nav-link" data-toggle="tab" href="#default">Bản đồ CTU</a></li>
+                            <li class="nav-item"><a href="{{route('sport-view')}}"class="nav-link">Sân Chơi</a></li>
+                            <li class="nav-item"><a class="nav-link">Tìm đường đi</a></li>
                         </ul>
 
                         <div id="app" class="tab-content">
-                            <div id="default" class="tab-pane fade in show active">
-                                <mapglobalview-component url='@json($url)'></mapglobalview-component>
-                            </div>
-                            <div id="menu1" class="tab-pane fade">
-                                <sports-grounds></sports-grounds>
-                            </div>
-                            <div id="menu2" class="tab-pane fade">
-                                <h3>Tìm kiếm đường đi</h3>
-                                <p>Some content in menu 2.</p>
-                            </div>
+                            <mapglobalview-component url='@json($url)'></mapglobalview-component>
                         </div>
                     </div>
                 </div>

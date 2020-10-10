@@ -1,6 +1,6 @@
 <template>
     <div>
-        <vl-map style="height: 500px" class="map" ref="map" @mounted="onMapMounted" :load-tiles-while-animating="true"
+        <vl-map style="height: 500px" class="map" @mounted="onMapMounted" :load-tiles-while-animating="true"
             :load-tiles-while-interacting="true">
             <vl-view :zoom.sync="zoom" :center.sync="center" :rotation.sync="rotation"></vl-view>
             <vl-layer-tile class="base-layer" :z-index="0">
@@ -147,7 +147,7 @@
             this.listUrl.forEach(function (value, index) {
                 axios.get(value.url).then((res) => {
                     listFloor[index] = (res.data);
-                    showLogic[index] = true;
+                    showLogic[index] = false;
                 });
             });
             this.loading = false;

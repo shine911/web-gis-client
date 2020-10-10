@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Web\LayersController;
-use App\LayersModel;
+use App\Models\LayersModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -24,7 +24,7 @@ Auth::routes([
 Route::get('/', function () {
     $data = ['url' => LayersModel::all() ];
     return view('index', $data);
-});
+})->name('index');
 
 Route::get('/login', function(){
     return view('login');
@@ -43,6 +43,12 @@ Route::group(['middleware' => 'localization'], function () {
     Route::post('/layers/detail/{id}', [LayersController::class, 'detailPost']);
     Route::get('/layers/create', [LayersController::class, 'create'])->name('layers.create');
     Route::post('/layers/create', [LayersController::class, 'createPost']);
+
+    //Index
+    //SportGrounds
+    Route::get("/sport-grounds", function(){
+       return view('sportview');
+    })->name('sport-view');
 
 });
 
