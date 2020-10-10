@@ -14,9 +14,54 @@
                         <vl-style-fill color="rgba(255,255,255,0.5)"></vl-style-fill>
                     </vl-style-box>
                 </vl-layer-vector>
-                <p v-if="loading">
-                    Loading map, please wait...
-                </p>
+                <vl-interaction-select :features.sync="selectedFeatures">
+                    <template slot-scope="select">
+                        <!-- select styles -->
+                        <vl-style-box>
+                            <vl-style-stroke color="#423e9e" :width="7"></vl-style-stroke>
+                            <vl-style-fill :color="[254, 178, 76, 0.7]"></vl-style-fill>
+                            <vl-style-circle :radius="5">
+                                <vl-style-stroke color="#423e9e" :width="7"></vl-style-stroke>
+                                <vl-style-fill :color="[254, 178, 76, 0.7]"></vl-style-fill>
+                            </vl-style-circle>
+                        </vl-style-box>
+                        <vl-style-box :z-index="1">
+                            <vl-style-stroke color="#d43f45" :width="2"></vl-style-stroke>
+                            <vl-style-circle :radius="5">
+                                <vl-style-stroke color="#d43f45" :width="2"></vl-style-stroke>
+                            </vl-style-circle>
+                        </vl-style-box>
+                        <!--// select styles -->
+
+                        <!-- selected feature popup -->
+                        <vl-overlay class="feature-popup" v-for="feature in select.features" :key="feature.id"
+                                    :id="feature.id" :position="pointOnSurface(feature.geometry)" :auto-pan="true"
+                                    :auto-pan-animation="{ duration: 300 }">
+                            <template slot-scope="popup">
+                                <section class="card">
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            Feature ID {{ feature.id }}
+                                            <a class="card-header-icon" title="Close"
+                                               @click="selectedFeatures = selectedFeatures.filter(f => f.id !== feature.id)">x</a>
+                                        </div>
+                                        <div class="content">
+                                            <ul>
+                                                <li>Mã phòng: {{feature.properties.roomcode}}</li>
+                                                <li>Tên phòng: {{feature.properties.roomnamevi}}</li>
+                                                <li>Tầng: {{feature.properties.floor}}</li>
+                                                <li>Sức chứa: {{feature.properties.capacity}}</li>
+                                                <li>Diện tích: {{feature.properties.area}}</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </section>
+                            </template>
+                        </vl-overlay>
+                        <!--// selected popup -->
+                    </template>
+                </vl-interaction-select>
+                <b-spinner v-if="loading"></b-spinner>
 
             </vl-map>
 
@@ -30,6 +75,9 @@ import ScaleLine from 'ol/control/ScaleLine'
 import FullScreen from 'ol/control/FullScreen'
 import OverviewMap from 'ol/control/OverviewMap'
 import ZoomSlider from 'ol/control/ZoomSlider'
+import {
+    findPointOnSurface
+} from "vuelayers/lib/ol-ext";
 
 export default {
     data() {
@@ -40,6 +88,7 @@ export default {
             features: [],
             loading: false,
             feature: [],
+            selectedFeatures: [],
         }
     },
     props: {src: String},
@@ -64,6 +113,7 @@ export default {
                 new ZoomSlider(),
             ])
         },
+        pointOnSurface: findPointOnSurface,
     }
 }
 </script>

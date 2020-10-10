@@ -1,8 +1,8 @@
-@extends('layouts.master')
+@extends('layouts.master', ['floors'=>$floors])
 @section('title', 'Web GIS Client')
 @section('content')
     <div class="app-main__inner">
-        
+
         <div class="app-page-title">
             <div class="page-title-wrapper">
                 <div class="page-title-heading">
@@ -17,19 +17,18 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="row">
             <div class="col-md-12">
                 <div class="main-card mb-3 card">
                     <div class="card-body">
                         <div class="card-title">Bản đồ ĐHCT</div>
                         <div id="app">
-                            <mapglobalview-component></mapglobalview-component>
+                            <mapglobalview-component url='@json($floors)'></mapglobalview-component>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 @endsection

@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'UTC+7',
 
     /*
     |--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'vi',
 
     /*
     |--------------------------------------------------------------------------
@@ -227,16 +227,5 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
-    ],
-    
-    /** 
-     * ----------------------------------------------------------------
-     * GEOSERVER
-     * ----------------------------------------------------------------
-    */
-    'geoserver'=>[
-        'hostname' => env('GEO_HOSTNAME', 'localhost'),
-        'port' => env('GEO_PORT', 8888),
-        'workspace' => env('GEO_WORKSPACE', 'ctu'),
     ],
 ];

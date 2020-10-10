@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\LayersModel;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     //index
     public function index(){
-
-        return view('home2');
+        $floors = LayersModel::all();
+        $data = ["floors"=>$floors];
+        return view('home2', $data);
     }
 }

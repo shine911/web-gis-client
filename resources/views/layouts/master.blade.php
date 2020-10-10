@@ -147,12 +147,14 @@
                                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                                 </a>
                                 <ul>
+                                    @foreach ($floors as $floor)
                                     <li>
-                                        <a href="/tang1_tret">
+                                    <a href="{{route('floor.show', ['floor'=>$floor->id])}}">
                                             <i class="metismenu-icon"></i>
-                                            {{__('message.heading_sidebar.management.floor', ['num'=>1])}}
+                                            {{$floor->layer_name}}
                                         </a>
                                     </li>
+                                    @endforeach
                                 </ul>
                             </li>
                             <li>

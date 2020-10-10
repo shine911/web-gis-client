@@ -29,7 +29,7 @@
                 </vl-style-box>
             </vl-layer-vector>
       -->
-            <vl-layer-vector v-for="(feature, index) in listFloor" :key="feature.id" :z-index="index">
+            <vl-layer-vector v-for="(feature, index) in listFloor" :key="id" :z-index="index">
                 <vl-source-vector v-if="showLogic[index]" :features.sync="feature.features"></vl-source-vector>
                 <vl-style-box>
                     <vl-style-stroke color="green" :width="1"></vl-style-stroke>
@@ -97,7 +97,7 @@
                     <ul>
                         <li  v-for="(value, index) in listUrl" :key="value.id">
                             <div class="position-relative form-check"><label class="form-check-label"><input
-                                        type="checkbox" class="form-check-input" v-model="showLogic[index]"> {{value.feature_name}}</label></div>
+                                        type="checkbox" class="form-check-input" v-model="showLogic[index]"> {{value.layer_name}}</label></div>
                         </li>
                     </ul>
                 </li>
@@ -146,13 +146,11 @@
             let showLogic = this.showLogic;
             this.listUrl.forEach(function (value, index) {
                 axios.get(value.url).then((res) => {
-                    
                     listFloor[index] = (res.data);
-                    showLogic[index] = false;
+                    showLogic[index] = true;
                 });
             });
             this.loading = false;
-            console.log(this.listFloor);
         },
         methods: {
             onMapMounted() {

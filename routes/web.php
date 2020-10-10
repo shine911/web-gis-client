@@ -1,9 +1,7 @@
 <?php
 
-use App\FeaturesConfigUrl;
-use GuzzleHttp\Psr7\Request;
-use Illuminate\Contracts\Session\Session;
-use Illuminate\Support\Facades\App;
+use App\Http\Controllers\Web\LayersController;
+use App\LayersModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -22,11 +20,12 @@ Auth::routes([
     'verify' => false,
     'register' => false,
  ]);
- 
+
 Route::get('/', function () {
-    $data = ['url' => FeaturesConfigUrl::all() ];
+    $data = ['url' => LayersModel::all() ];
     return view('index', $data);
 });
+
 Route::get('/login', function(){
     return view('login');
 });
@@ -35,12 +34,18 @@ Route::get('/login', function(){
 
 Route::group(['middleware' => 'localization'], function () {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-    Route::get('/room', 'Web\RoomViewController@index');
-    Route::get('/room/detail', 'Web\RoomViewController@detail')->name('room_detail');
-    Route::get('/mapeditor', 'WebMapEditorController@index');
-    Route::get('/tang1_tret', 'Web\Tang1_TretController@index');
-    Route::get('/tang1_tret/detail/{id}', 'Web\Tang1_TretController@detail');
+    Route::get('/floors/{floor}', 'Web\RoomsController@index')->name('floor.show');
+    Route::get('/floors/{floor}/detail/{id}', 'Web\RoomsController@detail')->name('room.show');
+
+    //Layer Settings
+    Route::get('/layers', [LayersController::class, 'index']);
+    Route::get('/layers/detail/{id}', [LayersController::class, 'detail']);
+    Route::post('/layers/detail/{id}', [LayersController::class, 'detailPost']);
+    Route::get('/layers/create', [LayersController::class, 'create'])->name('layers.create');
+    Route::post('/layers/create', [LayersController::class, 'createPost']);
+
 });
+
 //i18n Settings
 Route::get('settings/lang/{locale}', function ($locale) {
     $lang = $locale;
