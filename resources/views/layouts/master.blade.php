@@ -12,7 +12,6 @@
 
     <!-- Styles -->
 <link href="{{$app->make('url')->to('/')}}/main.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.4.2/css/ol.css" type="text/css">
     @yield('link-style')
 <style>
     .logo img{
@@ -143,13 +142,30 @@
                             <li>
                                 <a href="#">
                                     <i class="metismenu-icon pe-7s-menu"></i>
+                                    {{__('message.heading_sidebar.management.dormitories')}}
+                                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                </a>
+                                <ul>
+                                    @foreach ($dormitories as $floor)
+                                    <li>
+                                    <a href="{{route('dormitory.show', ['floor'=>$floor->floor, 'layerId'=> $floor->id])}}">
+                                            <i class="metismenu-icon"></i>
+                                            {{$floor->layer_name}}
+                                        </a>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="metismenu-icon pe-7s-menu"></i>
                                     {{__('message.heading_sidebar.management.room')}}
                                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                                 </a>
                                 <ul>
                                     @foreach ($floors as $floor)
                                     <li>
-                                    <a href="{{route('floor.show', ['floor'=>$floor->id])}}">
+                                    <a href="{{route('floor.show', ['floor'=>$floor->floor, 'layerId'=> $floor->id])}}">
                                             <i class="metismenu-icon"></i>
                                             {{$floor->layer_name}}
                                         </a>
@@ -224,7 +240,7 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="{{$app->make('url')->to('/')}}/js/app.js"></script>
+<script type="text/javascript" src="{{ mix('/js/app.js') }}"></script>
 
     <script type="text/javascript" src="{{$app->make('url')->to('/')}}/assets/scripts/main.js"></script>
 </body>

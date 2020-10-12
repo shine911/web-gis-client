@@ -24,7 +24,7 @@
                     <div class="card-body">
                         <div class="card-title">Bản đồ ĐHCT</div>
                         <div id="app">
-                            <mapglobalview-component url='@json($floors)'></mapglobalview-component>
+                            <mapglobalview-component url='@json($floors)' url-dormity='@json($dormitories)'></mapglobalview-component>
                         </div>
                     </div>
                 </div>

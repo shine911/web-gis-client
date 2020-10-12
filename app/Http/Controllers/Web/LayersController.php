@@ -27,11 +27,12 @@ class LayersController extends Controller
         $url = $req->get('url');
         $layer_type = $req->get('layer_type');
         $user_hidden = $req->get('user_hidden');
-
+        $floor = $req->get('floor')??1;
         $layer->layer_name = $layer_name;
         $layer->url = $url;
         $layer->layer_type = $layer_type;
         $layer->user_hide = $user_hidden??false;
+        $layer->floor = $floor;
         $layer->save();
         return redirect('/layers');
     }
@@ -47,11 +48,14 @@ class LayersController extends Controller
         $url = $req->get('url');
         $layer_type = $req->get('layer_type');
         $user_hidden = $req->get('user_hidden');
+        $floor = $req->get('floor')??1;
 
         $layer->layer_name = $layer_name;
         $layer->url = $url;
         $layer->layer_type = $layer_type;
         $layer->user_hide = $user_hidden??false;
+        $layer->floor = $floor;
+
         $layer->save();
         return redirect('/layers');
     }

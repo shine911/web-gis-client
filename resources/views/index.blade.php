@@ -30,7 +30,7 @@
                         </ul>
 
                         <div id="app" class="tab-content">
-                            <mapglobalview-component url='@json($url)'></mapglobalview-component>
+                            <mapglobalview-component url='@json($url)' url-dormity='@json($urlDormitys)'></mapglobalview-component>
                         </div>
                     </div>
                 </div>

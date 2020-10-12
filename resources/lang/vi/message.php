@@ -35,9 +35,10 @@ return [
 		'home' => 'Trang chủ',
 		'data_management' => 'Quản lí dữ liệu',
 		'management' => [
-			'room' => 'Hệ thống phòng',
+			'room' => 'Phòng',
 			'water_supply_and_drainage' => 'Hệ thống cấp nước',
-			'floor' => 'Tầng :num'
+			'floor' => 'Tầng :num',
+			'dormitories' => 'Ký túc xá'
 		],
 	],
     'navbar' => [

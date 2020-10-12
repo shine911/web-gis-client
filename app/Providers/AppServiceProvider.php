@@ -30,8 +30,10 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
 
         //View share
-        $floors = LayersModel::where("layer_type", "=", 0)->get();
+        $floors = LayersModel::where("layer_type", "=", 0)->orderBy('floor')->get();
+        $dormitories = LayersModel::where('layer_type', '=', 1)->orderBy('floor')->get();
 
         View::share('floors', $floors);
+        View::share('dormitories', $dormitories);
     }
 }
