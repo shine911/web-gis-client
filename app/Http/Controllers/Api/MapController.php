@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\tang1_tret;
+use Illuminate\Support\Facades\Http;
 use MStaack\LaravelPostgis\Geometries\LineString;
 use MStaack\LaravelPostgis\Geometries\MultiPolygon;
 use Illuminate\Http\Request;
@@ -15,13 +15,22 @@ class MapController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */
     public function index()
     {
-        //
+
+        $mode = encrypt('ph');
+        $value = encrypt('KT6');
+        $time = time();
+        $validate = encrypt('qlph.'.$value.$time);
+        $link = "https://qldiem.ctu.edu.vn/htql/quanly/webservices/getinfo.php?mode=$mode&value=$value&validate=$validate&time=$time";
+        return response($link);
     }
 
+    public function encrypt($str){
+        return md5(md5(md5(md5(md5($str)))));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -78,7 +87,7 @@ class MapController extends Controller
     {
         //Input from user
         $coordinates = $request->has("geom")?$request->get("geom"):"";
-        
+
         $features = tang1_tret::where('id','=',$id)->firstOrFail();
 
         /**

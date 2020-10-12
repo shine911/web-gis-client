@@ -22,7 +22,9 @@ Auth::routes([
  ]);
 
 Route::get('/', function () {
-    $data = ['url' => LayersModel::all() ];
+    $urlFloors = LayersModel::where("layer_type", "=", 0)->get();
+    $urlDormitys = LayersModel::where("layer_type", "=", 1)->get();
+    $data = ['url' => $urlFloors, 'urlDormitys' => $urlDormitys ];
     return view('index', $data);
 })->name('index');
 

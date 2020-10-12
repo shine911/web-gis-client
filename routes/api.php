@@ -21,3 +21,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //Route::middleware('utf-8')->resource('room', 'Api\RoomController');
 //TODO: Fix here
 Route::middleware('utf-8')->resource('room', 'Api\RoomController');
+Route::middleware('utf-8')->resource('map', 'Api\MapController');
