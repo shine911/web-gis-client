@@ -14,7 +14,7 @@
         :rotation.sync="rotation"
       ></vl-view>
       <vl-layer-tile class="base-layer" :z-index="0">
-        <vl-source-osm></vl-source-osm>
+        <vl-source-osm :attributions="copyright"></vl-source-osm>
       </vl-layer-tile>
 
       <vl-layer-vector
@@ -269,6 +269,7 @@ export default {
   },
   data() {
     return {
+      copyright: '&copy; <a href="https://www.ctu.edu.vn/" target="_blank">CTU WebGIS Project</a> contributors.',
       zoom: 16,
       center: [11774094.696107, 1122418.043939],
       rotation: 0,
