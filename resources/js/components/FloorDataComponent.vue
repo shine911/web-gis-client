@@ -297,7 +297,12 @@ export default {
             this.loading = true;
             if(confirm('Are you sure delete?')){
                 axios.delete('/api/room/'+this.form.id).then(
-                    (_) => {window.location.href = "/floors/6"}
+                    (_) => {
+                        let url = window.location.href
+                        url = url.slice(0, url.lastIndexOf('/'));
+                        url = url.slice(0, url.lastIndexOf('/'));
+                        window.location.href = url
+                    }
                 );
             }
             this.loading = false;

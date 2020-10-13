@@ -38,6 +38,7 @@ Vue.component('mapeditor-component', require('./components/MapEditorComponent.vu
 Vue.component('mapview-component', require('./components/MapViewComponent').default);
 Vue.component('mapglobalview-component', require('./components/MapGlobalViewComponent').default);
 Vue.component('floordata-component', require('./components/FloorDataComponent').default);
+Vue.component('dormitory-data', require('./components/DormitoryData').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

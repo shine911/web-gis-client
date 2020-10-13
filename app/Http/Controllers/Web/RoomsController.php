@@ -10,9 +10,9 @@ use Illuminate\Http\Request;
 class RoomsController extends Controller
 {
 
-    public function index(Request $request, $floor){
+    public function index(Request $request, $layerId, $floor){
         //Get floor Url
-        $floorObj = LayersModel::where("id", "=", $floor)->firstOrFail();
+        $floorObj = LayersModel::where("id", "=", $layerId)->firstOrFail();
 
         $search = $request->has('search') ? $request->get('search') : '';
         $room = Room::where('floor', '=', $floor)->orderBy('id')->paginate(10);
@@ -22,7 +22,7 @@ class RoomsController extends Controller
         return view("floor/index", $data);
     }
 
-    public function detail($floor, $id){
+    public function detail($layerId, $floor, $id){
         /*
         $room = tang1_tret::where('id', '=', $id)->firstOrFail();
         $localhost = $this->localhost;
@@ -43,7 +43,7 @@ class RoomsController extends Controller
         */
 
         $room = Room::where([['floor', '=', $floor], ['id', '=', $id]])->firstOrFail();
-        $floor = LayersModel::where('id', '=', $floor)->first();
+        $floor = LayersModel::where('id', '=', $layerId)->first();
         $url = $floor->url."&featureid=$id";
         $data = ['floor' => $floor, 'data'=>$room, 'url' => $url];
 

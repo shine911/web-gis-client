@@ -35,10 +35,18 @@ return [
 		'home' => 'Trang chủ',
 		'data_management' => 'Quản lí dữ liệu',
 		'management' => [
-			'room' => 'Hệ thống phòng',
-			'water_supply_and_drainage' => 'Hệ thống cấp nước',
-			'floor' => 'Tầng :num'
+			'room' => 'Phòng',
+			'waterNetwork' => 'Mạng lưới nước',
+			'floor' => 'Tầng :num',
+			'dormitories' => 'Ký túc xá',
+			'electricNetwork' => 'Mạng lưới điện',
+			
 		],
+		'app_management' => 'Cài đặt hệ thống',
+		'system' => [
+			'layers' => 'Quản lí lớp',
+			'info' => 'Thông tin hệ thống',
+		]
 	],
     'navbar' => [
 		'account_info' => 'Thông tin tài khoản',

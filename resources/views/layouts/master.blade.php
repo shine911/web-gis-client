@@ -12,7 +12,6 @@
 
     <!-- Styles -->
 <link href="{{$app->make('url')->to('/')}}/main.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.4.2/css/ol.css" type="text/css">
     @yield('link-style')
 <style>
     .logo img{
@@ -142,14 +141,14 @@
                         <li class="app-sidebar__heading">{{__('message.heading_sidebar.data_management')}}</li>
                             <li>
                                 <a href="#">
-                                    <i class="metismenu-icon pe-7s-menu"></i>
-                                    {{__('message.heading_sidebar.management.room')}}
+                                    <i class="metismenu-icon pe-7s-home"></i>
+                                    {{__('message.heading_sidebar.management.dormitories')}}
                                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                                 </a>
                                 <ul>
-                                    @foreach ($floors as $floor)
+                                    @foreach ($dormitories as $floor)
                                     <li>
-                                    <a href="{{route('floor.show', ['floor'=>$floor->id])}}">
+                                    <a href="{{route('dormitory.show', ['floor'=>$floor->floor, 'layerId'=> $floor->id])}}">
                                             <i class="metismenu-icon"></i>
                                             {{$floor->layer_name}}
                                         </a>
@@ -159,24 +158,67 @@
                             </li>
                             <li>
                                 <a href="#">
-                                    <i class="metismenu-icon pe-7s-drop"></i>
-                                    {{__('message.heading_sidebar.management.water_supply_and_drainage')}}
+                                    <i class="metismenu-icon pe-7s-culture"></i>
+                                    {{__('message.heading_sidebar.management.room')}}
                                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                                 </a>
                                 <ul>
-                                        <li>
-                                            <a href="/room">
-                                                <i class="metismenu-icon"></i>
-                                                Room
-                                            </a>
-                                        </li>
+                                    @foreach ($floors as $floor)
                                     <li>
-                                        <a href="/tang1_tret">
+                                    <a href="{{route('floor.show', ['floor'=>$floor->floor, 'layerId'=> $floor->id])}}">
                                             <i class="metismenu-icon"></i>
-                                            Tang 1_Tret
+                                            {{$floor->layer_name}}
                                         </a>
                                     </li>
+                                    @endforeach
                                 </ul>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="metismenu-icon pe-7s-gleam"></i>
+                                    {{__('message.heading_sidebar.management.electricNetwork')}}
+                                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                </a>
+                                <ul>
+                                    @foreach ($electricNetwork as $electric)
+                                    <li>
+                                    <a href="">
+                                            <i class="metismenu-icon"></i>
+                                            {{$electric->layer_name}}
+                                        </a>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="metismenu-icon pe-7s-drop"></i>
+                                    {{__('message.heading_sidebar.management.waterNetwork')}}
+                                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                </a>
+                                <ul>
+                                    @foreach($waterNetwork as $water)
+                                    <li>
+                                        <a href="">
+                                            <i class="metismenu-icon"></i>
+                                            {{$water->layer_name}}
+                                        </a>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                            <li class="app-sidebar__heading">{{__('message.heading_sidebar.app_management')}}</li>
+                            <li>
+                            <a href="{{route('layers.index')}}">
+                                    <i class="metismenu-icon pe-7s-map"></i>
+                                    {{__('message.heading_sidebar.system.layers')}}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="metismenu-icon pe-7s-info"></i>
+                                    {{__('message.heading_sidebar.system.info')}}
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -224,7 +266,7 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="{{$app->make('url')->to('/')}}/js/app.js"></script>
+<script type="text/javascript" src="{{ mix('/js/app.js') }}"></script>
 
     <script type="text/javascript" src="{{$app->make('url')->to('/')}}/assets/scripts/main.js"></script>
 </body>

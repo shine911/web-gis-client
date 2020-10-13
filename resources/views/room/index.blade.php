@@ -47,7 +47,7 @@
                                     <td>{{$item->block}}</td>
                                     <td>{{$item->roomcapacity}}</td>
                                     <td>{{$item->managementagencycode}}</td>
-                                <td><a href="{{action('Web\RoomViewController@detail', ['id'=>$item->roomid])}}" class="btn btn-primary">{{__('message.button.view_info')}}</a></td>
+                                <td><a href="{{route('room.show',['floor'=>$floor->floor, 'layerId'=> $floor->id, 'id' => $item->roomid])}}" class="btn btn-primary">{{__('message.button.view_info')}}</a></td>
                                 </tr>
                                 @endforeach
                             </tbody>

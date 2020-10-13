@@ -59,7 +59,7 @@
                                     <td>{{$item->roomcapacity}}</td>
                                     <td>{{$item->buildingcode}}</td>
 
-                                    <td><a href="{{route('room.show', ['floor' => $item->floor, 'id'=>$item->id])}}"
+                                <td><a href="{{route('room.show', ['layerId'=>$floor->id, 'floor'=>$floor->floor, 'id'=>$item->id])}}"
                                             class="btn btn-primary">{{__('message.button.view_info')}}</a></td>
                                 </tr>
                                 @endforeach
