@@ -141,7 +141,7 @@
                         <li class="app-sidebar__heading">{{__('message.heading_sidebar.data_management')}}</li>
                             <li>
                                 <a href="#">
-                                    <i class="metismenu-icon pe-7s-menu"></i>
+                                    <i class="metismenu-icon pe-7s-home"></i>
                                     {{__('message.heading_sidebar.management.dormitories')}}
                                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                                 </a>
@@ -158,7 +158,7 @@
                             </li>
                             <li>
                                 <a href="#">
-                                    <i class="metismenu-icon pe-7s-menu"></i>
+                                    <i class="metismenu-icon pe-7s-culture"></i>
                                     {{__('message.heading_sidebar.management.room')}}
                                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                                 </a>
@@ -168,6 +168,23 @@
                                     <a href="{{route('floor.show', ['floor'=>$floor->floor, 'layerId'=> $floor->id])}}">
                                             <i class="metismenu-icon"></i>
                                             {{$floor->layer_name}}
+                                        </a>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="metismenu-icon pe-7s-gleam"></i>
+                                    {{__('message.heading_sidebar.management.electricNetwork')}}
+                                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                </a>
+                                <ul>
+                                    @foreach ($electricNetwork as $electric)
+                                    <li>
+                                    <a href="">
+                                            <i class="metismenu-icon"></i>
+                                            {{$electric->layer_name}}
                                         </a>
                                     </li>
                                     @endforeach

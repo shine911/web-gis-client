@@ -38,7 +38,8 @@ return [
 			'room' => 'Phòng',
 			'water_supply_and_drainage' => 'Hệ thống cấp nước',
 			'floor' => 'Tầng :num',
-			'dormitories' => 'Ký túc xá'
+			'dormitories' => 'Ký túc xá',
+			'electricNetwork' => 'Mạng lưới điện',
 		],
 	],
     'navbar' => [

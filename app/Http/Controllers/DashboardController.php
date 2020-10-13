@@ -9,9 +9,8 @@ class DashboardController extends Controller
 {
     //index
     public function index(){
-        $urlFloors = LayersModel::where("layer_type", "=", 0)->orderBy('floor')->get();
-        $urlDormitys = LayersModel::where("layer_type", "=", 1)->orderBy('floor')->get();
-        $data = ['url' => $urlFloors, 'urlDormitys' => $urlDormitys ];
+        $electricNetwork =  LayersModel::where('layer_type', '=', 2)->get();
+        $data = ['electricNetwork' => $electricNetwork ];
         return view('home2', $data);
     }
 }

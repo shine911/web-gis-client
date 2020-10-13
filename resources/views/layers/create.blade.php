@@ -44,7 +44,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="floor">Tầng Layer</label>
-                                        <input type="text" class="form-control" name="floor" id="floor" value="{{$layer->floor}}" />
+                                        <input type="text" class="form-control" name="floor" id="floor" />
                                     </div>
                                     <input type="submit" class="btn btn-primary" name="btnSub" value="Submit" />
                                 </form>

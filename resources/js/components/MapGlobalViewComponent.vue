@@ -48,6 +48,21 @@
         </vl-style-box>
       </vl-layer-vector>
 
+      <vl-layer-vector
+        v-for="(feature, index) in listElectricNetwork"
+        :key="`electricNetwork-${index}`"
+        :z-index="index"
+        :id="`electricNetwork${index}`"
+      >
+        <vl-source-vector
+          v-if="showLogicElectricNetwork[index]"
+          :features.sync="feature.features"
+        ></vl-source-vector> 
+        <vl-style-box v-if="showLogicElectricNetwork[index]">
+          <vl-style-stroke :color="feature.color" :width="1"></vl-style-stroke>
+        </vl-style-box>
+      </vl-layer-vector>
+
       <vl-interaction-select :features.sync="selectedFeatures">
         <template slot-scope="select">
           <!-- select styles -->
@@ -116,8 +131,8 @@
       <ul class="vertical-nav-menu">
         <li>
           <a href="#">
-            <i class="metismenu-icon pe-7s-car"></i>
-            Room
+            <i class="metismenu-icon pe-7s-culture"></i>
+            Phòng
             <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
           </a>
           <ul>
@@ -137,8 +152,8 @@
         </li>
         <li>
           <a href="#">
-            <i class="metismenu-icon pe-7s-car"></i>
-            Kí túc xá
+            <i class="metismenu-icon pe-7s-home"></i>
+            Ký túc xá
             <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
           </a>
           <ul>
@@ -149,6 +164,27 @@
                     type="checkbox"
                     class="form-check-input"
                     v-model="showLogicDormity[index]"
+                  />
+                  {{ value.layer_name }}</label
+                >
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li v-if="listUrlElectricNetwork.length != 0">
+          <a href="#">
+            <i class="metismenu-icon pe-7s-gleam"></i>
+            Mạng lưới điện
+            <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+          </a>
+          <ul>
+            <li v-for="(value, index) in listUrlElectricNetwork" :key="value.id">
+              <div class="position-relative form-check">
+                <label class="form-check-label"
+                  ><input
+                    type="checkbox"
+                    class="form-check-input"
+                    v-model="showLogicElectricNetwork[index]"
                   />
                   {{ value.layer_name }}</label
                 >
@@ -177,6 +213,7 @@ export default {
     urlDormity: String,
     urlElectric: String,
     urlWater: String,
+    userHideLogic: Boolean,
   },
   data() {
     return {
@@ -184,14 +221,14 @@ export default {
       center: [11774094.696107, 1122418.043939],
       rotation: 0,
       listFloor: [],
-      floorGroupLayerId: [],
-      dormityGroupLayerId: [],
       loading: false,
       selectedFeatures: [],
       selectedDormity: [],
       showLogic: [],
       listDormity: [],
       showLogicDormity: [],
+      listElectricNetwork: [],
+      showLogicElectricNetwork: [],
     };
   },
   beforeMount() {
@@ -218,7 +255,6 @@ export default {
         listFloor[index].color = color;
       });
       showLogic[index] = false;
-      floorLayerGroup.push('floor'+index);
     });
 
     //Dormity
@@ -236,8 +272,20 @@ export default {
         listDormity[index].color = color;
       });
       showLogicDormity[index] = false;
-      dormityLayerGroup.push('dormity'+index);
     });
+
+    //ElectricNetwork
+    if(this.urlElectric!==undefined){
+      let listElectricNetwork = this.listElectricNetwork;
+      let showLogicElectricNetwork = this.showLogicElectricNetwork;
+      this.listUrlElectricNetwork.forEach((value, index) => {
+        axios.get(value.url).then((res)=>{
+          listElectricNetwork[index] = res.data;
+          listElectricNetwork[index].color = 'red';
+        });
+        showLogicElectricNetwork[index] = false;
+      });
+    }
 
     this.loading = false;
   },
@@ -267,11 +315,20 @@ export default {
   computed: {
     //url parse json
     listUrl: function () {
+        if(this.userHideLogic){
+          return JSON.parse(this.url).filter(url => url.user_hide == false);
+        }
         return JSON.parse(this.url);
     },
     listUrlDormity: function(){
         return JSON.parse(this.urlDormity);
     },
+    listUrlElectricNetwork: function(){
+        if(this.userHideLogic){
+          return [];
+        }
+        return JSON.parse(this.urlElectric);
+    }
   },
 };
 </script>

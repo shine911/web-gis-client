@@ -32,8 +32,10 @@ class AppServiceProvider extends ServiceProvider
         //View share
         $floors = LayersModel::where("layer_type", "=", 0)->orderBy('floor')->get();
         $dormitories = LayersModel::where('layer_type', '=', 1)->orderBy('floor')->get();
+        $electricNetwork =  LayersModel::where('layer_type', '=', 2)->get();
 
         View::share('floors', $floors);
         View::share('dormitories', $dormitories);
+        View::share('electricNetwork', $electricNetwork);
     }
 }
