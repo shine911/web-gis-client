@@ -17,8 +17,9 @@ class AddFeaturesConfig extends Migration
             //
             $table->increments('id');
             $table->string('layer_name');
-            //type: 1 Floor, type: 2 - Water, 3 - Electric
+            //type: 0 Floor, type: 2 - Dormitory, 3 - Electric, 4 - Water
             $table->integer('layer_type');
+            $table->integer('floor');
             $table->string('url');
             $table->boolean('user_hide');
             $table->timestamps();
@@ -32,8 +33,8 @@ class AddFeaturesConfig extends Migration
      */
     public function down()
     {
-        Schema::table('features_config', function (Blueprint $table) {
-            Schema::drop('features_config');
+        Schema::table('layers', function (Blueprint $table) {
+            Schema::drop('layers');
         });
     }
 }
