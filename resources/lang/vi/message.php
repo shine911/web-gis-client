@@ -36,11 +36,17 @@ return [
 		'data_management' => 'Quản lí dữ liệu',
 		'management' => [
 			'room' => 'Phòng',
-			'water_supply_and_drainage' => 'Hệ thống cấp nước',
+			'waterNetwork' => 'Mạng lưới nước',
 			'floor' => 'Tầng :num',
 			'dormitories' => 'Ký túc xá',
 			'electricNetwork' => 'Mạng lưới điện',
+			
 		],
+		'app_management' => 'Cài đặt hệ thống',
+		'system' => [
+			'layers' => 'Quản lí lớp',
+			'info' => 'Thông tin hệ thống',
+		]
 	],
     'navbar' => [
 		'account_info' => 'Thông tin tài khoản',

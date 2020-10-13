@@ -63,6 +63,21 @@
         </vl-style-box>
       </vl-layer-vector>
 
+      <vl-layer-vector
+        v-for="(feature, index) in listWaterNetwork"
+        :key="`waterNetwork-${index}`"
+        :z-index="index"
+        :id="`waterNetwork${index}`"
+      >
+        <vl-source-vector
+          v-if="showLogicWaterNetwork[index]"
+          :features.sync="feature.features"
+        ></vl-source-vector> 
+        <vl-style-box v-if="showLogicWaterNetwork[index]">
+          <vl-style-stroke :color="feature.color" :width="1"></vl-style-stroke>
+        </vl-style-box>
+      </vl-layer-vector>
+
       <vl-interaction-select :features.sync="selectedFeatures">
         <template slot-scope="select">
           <!-- select styles -->
@@ -191,6 +206,27 @@
               </div>
             </li>
           </ul>
+            <!-- Water network -->
+          <li v-if="listUrlWaterNetwork.length != 0">
+          <a href="#">
+            <i class="metismenu-icon pe-7s-drop"></i>
+            Mạng lưới nuowsc
+            <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+          </a>
+          <ul>
+            <li v-for="(value, index) in listUrlWaterNetwork" :key="value.id">
+              <div class="position-relative form-check">
+                <label class="form-check-label"
+                  ><input
+                    type="checkbox"
+                    class="form-check-input"
+                    v-model="showLogicWaterNetwork[index]"
+                  />
+                  {{ value.layer_name }}</label
+                >
+              </div>
+            </li>
+          </ul>
         </li>
       </ul>
     </div>
@@ -229,6 +265,8 @@ export default {
       showLogicDormity: [],
       listElectricNetwork: [],
       showLogicElectricNetwork: [],
+      listWaterNetwork: [],
+      showLogicWaterNetwork: [],
     };
   },
   beforeMount() {
@@ -275,15 +313,28 @@ export default {
     });
 
     //ElectricNetwork
-    if(this.urlElectric!==undefined){
+    if (this.urlElectric !== undefined) {
       let listElectricNetwork = this.listElectricNetwork;
       let showLogicElectricNetwork = this.showLogicElectricNetwork;
       this.listUrlElectricNetwork.forEach((value, index) => {
-        axios.get(value.url).then((res)=>{
+        axios.get(value.url).then((res) => {
           listElectricNetwork[index] = res.data;
-          listElectricNetwork[index].color = 'red';
+          listElectricNetwork[index].color = "red";
         });
         showLogicElectricNetwork[index] = false;
+      });
+    }
+
+    //WaterNetwork
+    if (this.urlWater !== undefined) {
+      let listWaterNetwork = this.listWaterNetwork;
+      let showLogicWaterNetwork = this.showLogicWaterNetwork;
+      this.listUrlWaterNetwork.forEach((value, index) => {
+        axios.get(value.url).then((res) => {
+          listWaterNetwork[index] = res.data;
+          listWaterNetwork[index].color = "blue";
+        });
+        showLogicWaterNetwork[index] = false;
       });
     }
 
@@ -303,7 +354,7 @@ export default {
       ]);
     },
     pointOnSurface: findPointOnSurface,
-    color () {
+    color() {
       var letters = "0123456789ABCDEF";
       var color = "#";
       for (var i = 0; i < 6; i++) {
@@ -315,20 +366,26 @@ export default {
   computed: {
     //url parse json
     listUrl: function () {
-        if(this.userHideLogic){
-          return JSON.parse(this.url).filter(url => url.user_hide == false);
-        }
-        return JSON.parse(this.url);
+      if (this.userHideLogic) {
+        return JSON.parse(this.url).filter((url) => url.user_hide == false);
+      }
+      return JSON.parse(this.url);
     },
-    listUrlDormity: function(){
-        return JSON.parse(this.urlDormity);
+    listUrlDormity: function () {
+      return JSON.parse(this.urlDormity);
     },
-    listUrlElectricNetwork: function(){
-        if(this.userHideLogic){
-          return [];
-        }
-        return JSON.parse(this.urlElectric);
-    }
+    listUrlElectricNetwork: function () {
+      if (this.userHideLogic) {
+        return [];
+      }
+      return JSON.parse(this.urlElectric);
+    },
+    listUrlWaterNetwork: function () {
+      if (this.userHideLogic) {
+        return [];
+      }
+      return JSON.parse(this.urlWater);
+    },
   },
 };
 </script>

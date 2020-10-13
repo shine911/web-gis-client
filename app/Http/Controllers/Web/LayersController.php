@@ -10,7 +10,7 @@ class LayersController extends Controller
 {
     //index page
     public function index(){
-        $layer = LayersModel::paginate(10);
+        $layer = LayersModel::orderBy('id')->paginate(10);
         $search = '';
         $data = ["dataLayer"=>$layer, "search" => $search];
         return view('layers.index', $data);

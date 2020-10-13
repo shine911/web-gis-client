@@ -40,7 +40,12 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="layer_type">Loại Layer</label>
-                                        <input type="text" class="form-control" name="layer_type" id="layer_type" value="{{$layer->layer_type}}" />
+                                        <select id="layer_type" class="form-control" name="layer_type">
+                                            <option value="0" {{$layer->layer_type==0?'selected':''}}>Phòng học</option>
+                                            <option value="1" {{$layer->layer_type==1?'selected':''}}>Ký túc xá</option>
+                                            <option value="2" {{$layer->layer_type==2?'selected':''}}>Mạng lưới điện</option>
+                                            <option value="3" {{$layer->layer_type==3?'selected':''}}>Mạng lưới nước</option>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="floor">Tầng Layer</label>

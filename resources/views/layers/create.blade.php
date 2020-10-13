@@ -40,7 +40,12 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="layer_type">Loại Layer</label>
-                                        <input type="text" class="form-control" name="layer_type" id="layer_type" />
+                                        <select id="layer_type" class="form-control" name="layer_type">
+                                            <option value="0">Phòng học</option>
+                                            <option value="1">Ký túc xá</option>
+                                            <option value="2">Mạng lưới điện</option>
+                                            <option value="3">Mạng lưới nước</option>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="floor">Tầng Layer</label>

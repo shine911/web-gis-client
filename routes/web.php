@@ -45,7 +45,7 @@ Route::group(['middleware' => 'localization'], function () {
     Route::get('/dormitories/{layerId}.{floor}/detail/{id}', [DormitoryController::class, 'detail'])->name('dormitory.detail');
 
     //Layer Settings
-    Route::get('/layers', [LayersController::class, 'index']);
+    Route::get('/layers', [LayersController::class, 'index'])->name('layers.index');
     Route::get('/layers/detail/{id}', [LayersController::class, 'detail']);
     Route::post('/layers/detail/{id}', [LayersController::class, 'detailPost']);
     Route::get('/layers/create', [LayersController::class, 'create'])->name('layers.create');

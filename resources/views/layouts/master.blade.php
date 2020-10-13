@@ -193,23 +193,32 @@
                             <li>
                                 <a href="#">
                                     <i class="metismenu-icon pe-7s-drop"></i>
-                                    {{__('message.heading_sidebar.management.water_supply_and_drainage')}}
+                                    {{__('message.heading_sidebar.management.waterNetwork')}}
                                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                                 </a>
                                 <ul>
-                                        <li>
-                                            <a href="/room">
-                                                <i class="metismenu-icon"></i>
-                                                Room
-                                            </a>
-                                        </li>
+                                    @foreach($waterNetwork as $water)
                                     <li>
-                                        <a href="/tang1_tret">
+                                        <a href="">
                                             <i class="metismenu-icon"></i>
-                                            Tang 1_Tret
+                                            {{$water->layer_name}}
                                         </a>
                                     </li>
+                                    @endforeach
                                 </ul>
+                            </li>
+                            <li class="app-sidebar__heading">{{__('message.heading_sidebar.app_management')}}</li>
+                            <li>
+                            <a href="{{route('layers.index')}}">
+                                    <i class="metismenu-icon pe-7s-map"></i>
+                                    {{__('message.heading_sidebar.system.layers')}}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="metismenu-icon pe-7s-info"></i>
+                                    {{__('message.heading_sidebar.system.info')}}
+                                </a>
                             </li>
                         </ul>
                     </div>
