@@ -17,19 +17,27 @@ class MapController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $req)
     {
-
-        $mode = encrypt('ph');
-        $value = encrypt('KT6');
-        $time = time();
-        $validate = encrypt('qlph.'.$value.$time);
+        //$mode = encrypt('phonghoc') hoặc encrypt('hdnk')
+        //$value = encrypt('mã phòng');
+        //$validate = encrypt('qlph.'.$value.$time);
+        //$time = time();
+        $mode = $req->get('mode')??'';
+        $value = $req->get('value')??'';
+        $time = $req->get('time')??'';
+        $validate = $req->get('validate')??'';
         $link = "https://qldiem.ctu.edu.vn/htql/quanly/webservices/getinfo.php?mode=$mode&value=$value&validate=$validate&time=$time";
-        return response($link);
+    
+        //$jsonData = file_get_contents($link);
+        //$link = "https://hdquuia17050.000webhostapp.com/ajax_server.php?mode=hdnk&value=allpositioninmap";
+        
+        return Http::post($link)->json();
+        //return response()->json($link);
     }
 
-    public function encrypt($str){
-        return md5(md5(md5(md5(md5($str)))));
+    function encrypt($str){
+        return bcrypt($str);
     }
     /**
      * Show the form for creating a new resource.

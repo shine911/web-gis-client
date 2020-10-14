@@ -67,6 +67,7 @@
         "jvectormap": "^2.0.4",
         "load-google-maps-api": "^1.0.0",
         "masonry-layout": "^4.2.0",
+        "md5": "^2.3.0",
         "moment": "^2.19.1",
         "perfect-scrollbar": "^1.1.0",
         "popper.js": "^1.12.6",
