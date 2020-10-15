@@ -427,8 +427,9 @@ export default {
       for (let i = 0; i < 5; i++) {
         validate = md5(validate);
       }
-      console.log(timestamps);
-      return axios.get("/api/map", {
+      //console.log(timestamps);
+
+      return axios.get("api/map", {
           params: {
             mode: mode,
             value: value,
