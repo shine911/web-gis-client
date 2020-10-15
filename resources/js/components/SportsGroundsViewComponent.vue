@@ -219,7 +219,7 @@ export default {
         validate = md5(validate);
       }
 
-      return axios.get("../api/map", {
+      return axios.get("api/map", {
           params: {
             mode: mode,
             value: value,
