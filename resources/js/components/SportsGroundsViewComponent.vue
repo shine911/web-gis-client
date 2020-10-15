@@ -166,7 +166,7 @@ export default {
           })
       }));
     axios.get(
-        "http://localhost:8600/geoserver/ctu/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ctu%3Asports_grounds&maxFeatures=50&outputFormat=application%2Fjson"
+        "http://localhost:8000/geoserver/ctu/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ctu%3Asports_grounds&maxFeatures=50&outputFormat=application%2Fjson"
       )
       .then((res) => {
         this.sportGrounds = res.data.features;
@@ -200,7 +200,7 @@ export default {
         return feature.values_.state === "NO"
     },
     getGeoJSON: function() {
-        return axios.get("http://localhost:8600/geoserver/ctu/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ctu%3Aextracurricular_points&maxFeatures=50&outputFormat=application%2Fjson");
+        return axios.get("http://localhost:8000/geoserver/ctu/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ctu%3Aextracurricular_points&maxFeatures=50&outputFormat=application%2Fjson");
     },
     getPointInfoCTU: function() {
       let dateTime = Math.floor(new Date().getTime() / 1000);
