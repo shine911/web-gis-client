@@ -266,7 +266,7 @@
             </div>
         </div>
     </div>
-<script type="text/javascript" src="{{ mix('/js/app.js') }}"></script>
+    <script type="text/javascript" src="{{$app->make('url')->to('/')}}/js/app.js"></script>
 
     <script type="text/javascript" src="{{$app->make('url')->to('/')}}/assets/scripts/main.js"></script>
 </body>
