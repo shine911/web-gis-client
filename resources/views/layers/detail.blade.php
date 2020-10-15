@@ -24,7 +24,7 @@
                         <h5 class="card-title">Thông tin các lớp bản đồ</h5>
                         <div class="row">
                             <div class="col-lg-6 col-md-12">
-                                <form method="POST" action="/layers/detail/{{$layer->id}}">
+                                <form method="POST" action="{{route('layer.detail', ["id"=>$layer->id])}}">
                                     @csrf
                                     <div class="form-group">
                                         <label for="layer_name">Tên Layer</label>

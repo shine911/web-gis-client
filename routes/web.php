@@ -46,7 +46,7 @@ Route::group(['middleware' => 'localization'], function () {
 
     //Layer Settings
     Route::get('/layers', [LayersController::class, 'index'])->name('layers.index');
-    Route::get('/layers/detail/{id}', [LayersController::class, 'detail']);
+    Route::get('/layers/detail/{id}', [LayersController::class, 'detail'])->name('layer.detail');
     Route::post('/layers/detail/{id}', [LayersController::class, 'detailPost']);
     Route::get('/layers/create', [LayersController::class, 'create'])->name('layers.create');
     Route::post('/layers/create', [LayersController::class, 'createPost']);
