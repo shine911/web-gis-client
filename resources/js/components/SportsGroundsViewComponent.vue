@@ -2,10 +2,11 @@
   <div>
     <vl-map
       id="map2"
-      ref="map2"
+      ref="map"
       style="height: 500px"
       :load-tiles-while-animating="true"
       :load-tiles-while-interacting="true"
+      @postcompose="onMapPostCompose"
     >
       <vl-view
         :zoom.sync="zoom"
@@ -18,7 +19,7 @@
         <vl-layer-vector :z-index="1">
           <vl-source-vector :features.sync="sportGrounds"></vl-source-vector>
         </vl-layer-vector>
-        <vl-layer-vector id="sport" :z-index="2">
+        <vl-layer-vector id="sport" :z-index="2" render="image">
           <vl-source-vector :features.sync="features"></vl-source-vector>
           <vl-style-box :condition="isRed">
             <vl-style-icon
@@ -32,6 +33,20 @@
               :scale="1"></vl-style-icon>
           </vl-style-box>
         </vl-layer-vector>
+
+      <!-- My point Layer -->
+      <!-- geolocation -->
+      <vl-geoloc @update:position="onUpdatePosition" >
+        <template slot-scope="geoloc">
+          <vl-feature ref="marker" :properties="{ start: Date.now(), duration: 2500 }" v-if="geoloc.position" id="position-feature">
+            <vl-geom-point :coordinates="geoloc.position"></vl-geom-point>
+            <vl-style-box>
+              <vl-style-icon src="./assets/images/marker.png" :scale="0.4" :anchor="[0.5, 0.95]" :size="[128, 128]"></vl-style-icon>
+            </vl-style-box>
+          </vl-feature>
+        </template>
+      </vl-geoloc>
+      <!--// geolocation -->
 
         <vl-interaction-select
           :features.sync="selectedFeatures"
@@ -108,12 +123,13 @@
 
 <script>
 import axios from "axios";
-import { findPointOnSurface } from "vuelayers/lib/ol-ext";
+import { findPointOnSurface, createStyle } from "vuelayers/lib/ol-ext";
 import ScaleLine from "ol/control/ScaleLine";
 import FullScreen from "ol/control/FullScreen";
 import OverviewMap from "ol/control/OverviewMap";
 import ZoomSlider from "ol/control/ZoomSlider";
 import md5 from "md5";
+const easeInOut = t => 1 - Math.pow(1 - t, 3);
 
 export default {
   data() {
@@ -126,6 +142,7 @@ export default {
       selectedFeatures: [],
       activeFeatures: [],
       sportGrounds: [],
+      deviceCoordinate: undefined,
     };
   },
   beforeMount() {
@@ -136,8 +153,6 @@ export default {
     this.loading = true;
     
       axios.all([this.getPointInfoCTU(), this.getGeoJSON()]).then(axios.spread((info, geo)=>{
-          console.log(info);
-          console.log(geo);
           info = Object.values(info.data.original);
           this.features = geo.data.features;
           this.features.forEach(f => {
@@ -160,6 +175,9 @@ export default {
   },
   methods: {
     pointOnSurface: findPointOnSurface,
+    onUpdatePosition (coordinate) {
+      this.deviceCoordinate = coordinate
+    },
     onMapMounted() {
       // now ol.Map instance is ready and we can work with it directly
       this.$refs.map.$map.getControls().extend([
@@ -176,16 +194,16 @@ export default {
       return this.features.filter((f) => f.properties.state === false);
     },
     isRed (feature, resolution) {
-        return feature.values_.state === "NO"
+        return feature.values_.state === "YES"
     },
     isGreen (feature, resolution) {
-        return feature.values_.state === "YES"
+        return feature.values_.state === "NO"
     },
     getGeoJSON: function() {
         return axios.get("http://localhost:8600/geoserver/ctu/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ctu%3Aextracurricular_points&maxFeatures=50&outputFormat=application%2Fjson");
     },
     getPointInfoCTU: function() {
-      let dateTime = Math.floor(new Date().now / 1000);
+      let dateTime = Math.floor(new Date().getTime() / 1000);
       let mode = "hdnk";
       let value = "allpositioninmap";
       let encryptDateTime = dateTime;
@@ -209,6 +227,31 @@ export default {
             time: dateTime,
           },
         });
+    },
+    onMapPostCompose ({ vectorContext, frameState }) {
+      if (!this.$refs.marker || !this.$refs.marker.$feature) return
+      const feature = this.$refs.marker.$feature
+      if (!feature.getGeometry() || !feature.getStyle()) return
+      const flashGeom = feature.getGeometry().clone()
+      const duration = feature.get('duration')
+      const elapsed = frameState.time - feature.get('start')
+      const elapsedRatio = elapsed / duration
+      const radius = easeInOut(elapsedRatio) * 35 + 5
+      const opacity = easeInOut(1 - elapsedRatio)
+      const fillOpacity = easeInOut(0.5 - elapsedRatio)
+      vectorContext.setStyle(createStyle({
+        imageRadius: radius,
+        fillColor: [119, 170, 203, fillOpacity],
+        strokeColor: [119, 170, 203, opacity],
+        strokeWidth: 2 + opacity,
+      }))
+      vectorContext.drawGeometry(flashGeom)
+      vectorContext.setStyle(feature.getStyle()(feature)[0])
+      vectorContext.drawGeometry(feature.getGeometry())
+      if (elapsed > duration) {
+        feature.set('start', Date.now())
+      }
+      this.$refs.map.render()
     },
   },
 };

@@ -17,7 +17,7 @@
         <vl-source-osm :attributions="copyright"></vl-source-osm>
       </vl-layer-tile>
 
-      <vl-layer-vector
+      <vl-layer-vector render-mode="image"
         v-for="(feature, index) in listFloor"
         :key="`floor-${index}`"
         :z-index="index"
@@ -25,15 +25,23 @@
       >
         <vl-source-vector
           v-if="showLogic[index]"
-          :features.sync="feature.features"
+          :features.sync="feature"
         ></vl-source-vector> 
-        <vl-style-box v-if="showLogic[index]">
+        <vl-style-box :condition="isRed" v-if="showLogic[index]">
           <vl-style-stroke :color="feature.color" :width="1"></vl-style-stroke>
-          <vl-style-fill color="white"></vl-style-fill>
+          <vl-style-fill color="red"></vl-style-fill>
+        </vl-style-box>
+        <vl-style-box :condition="isGreen" v-if="showLogic[index]">
+          <vl-style-stroke :color="feature.color" :width="1"></vl-style-stroke>
+          <vl-style-fill color="green"></vl-style-fill>
+        </vl-style-box>
+        <vl-style-box :condition="isYellow" v-if="showLogic[index]">
+          <vl-style-stroke :color="feature.color" :width="1"></vl-style-stroke>
+          <vl-style-fill color="yellow"></vl-style-fill>
         </vl-style-box>
       </vl-layer-vector>
 
-      <vl-layer-vector
+      <vl-layer-vector render-mode="image"
         v-for="(feature, index) in listDormity"
         :key="`dormity-${index}`"
         :z-index="index"
@@ -49,7 +57,7 @@
         </vl-style-box>
       </vl-layer-vector>
 
-      <vl-layer-vector
+      <vl-layer-vector render-mode="image"
         v-for="(feature, index) in listElectricNetwork"
         :key="`electricNetwork-${index}`"
         :z-index="index"
@@ -64,7 +72,7 @@
         </vl-style-box>
       </vl-layer-vector>
 
-      <vl-layer-vector
+      <vl-layer-vector render-mode="image"
         v-for="(feature, index) in listWaterNetwork"
         :key="`waterNetwork-${index}`"
         :z-index="index"
@@ -133,12 +141,15 @@
                     >
                   </div>
                   <div class="content">
-                    <ul v-if="feature.properties.roomcode!==undefined">
+                    <ul v-if="feature.properties.roomcode !== undefined">
                       <li>Mã phòng: {{ feature.properties.roomcode }}</li>
                       <li>Tên phòng: {{ feature.properties.roomnamevi }}</li>
                       <li>Tầng: {{ feature.properties.floor }}</li>
-                      <li>Sức chứa: {{ feature.properties.capacity }}</li>
-                      <li>Diện tích: {{ feature.properties.area }}</li>
+                      <li>Sức chứa: {{ feature.properties.info.SUCCHUA }}</li>
+                      <li>Diện tích: {{ feature.properties.info.DIENTICH }}</li>
+                      <li>Trạng thái: {{ feature.properties.info.TRANGTHAI }}</li>
+                      <li>Tên hoạt động: {{ feature.properties.info.TENHOATDONG }}</li>
+                      <li>CSVC: {{ feature.properties.info.CSVC }}</li>
                     </ul>
                     <ul v-else>
                       <li>Toà nhà: {{ feature.properties.building }}</li>
@@ -255,6 +266,7 @@ import FullScreen from "ol/control/FullScreen";
 import OverviewMap from "ol/control/OverviewMap";
 import ZoomSlider from "ol/control/ZoomSlider";
 import { findPointOnSurface, createStyle } from "vuelayers/lib/ol-ext";
+import md5 from "md5";
 const easeInOut = t => 1 - Math.pow(1 - t, 3);
 
 export default {
@@ -300,19 +312,30 @@ export default {
     let listFloor = this.listFloor;
     let showLogic = this.showLogic;
     let floorLayerGroup = this.floorGroupLayerId;
+    let app = this;
     this.listUrl.forEach(function (value, index) {
-      var letters = "0123456789ABCDEF";
-      var color = "#";
-      for (var i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-      }
-      axios.get(value.url).then((res) => {
-        listFloor[index] = res.data;
-        listFloor[index].color = color;
-      });
+      //Process all CTU info and Layer info
+      axios.all([app.getPointInfoCTU(), app.getLayer(value.url)]).then(
+        axios.spread((info, geo) => 
+      {
+        listFloor[index] = geo.data.features;
+        info = Object.values(info.data.original);
+        listFloor[index] = listFloor[index].map(f => {
+          f.properties.info = info.find( i => i.TENPHONG == f.properties.roomcode );
+          if(f.properties.info === undefined){
+            f.properties.info ={ "TENPHONG": "103",
+                      "SUCCHUA": "Đang cập nhật...",
+                      "DIENTICH": "Đang cập nhật...",
+                      "CSVC": "Đang cập nhật...",
+                      "TRANGTHAI": "UPDATE",
+                      "TENHOATDONG": "Đang cập nhật..."
+                      }
+          }
+          return f;
+        });
+      }));
       showLogic[index] = false;
     });
-
     //Dormity
     let listDormity = this.listDormity;
     let showLogicDormity = this.showLogicDormity;
@@ -359,6 +382,16 @@ export default {
     this.loading = false;
   },
   methods: {
+    isRed (feature, resolution) {
+        return feature.values_.info.TRANGTHAI === "YES";
+    },
+    isGreen (feature, resolution) {
+        return feature.values_.info.TRANGTHAI === "NO";
+    },
+    isYellow (feature, resolution){
+      return feature.values_.info.TRANGTHAI == "UPDATE";
+    }
+    ,
     onUpdatePosition (coordinate) {
       this.deviceCoordinate = coordinate
     },
@@ -374,15 +407,37 @@ export default {
         new ZoomSlider(),
       ]);
     },
-    pointOnSurface: findPointOnSurface,
-    color() {
-      var letters = "0123456789ABCDEF";
-      var color = "#";
-      for (var i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-      }
-      return color;
+    getLayer: function(inpUrl){
+      return axios.get(inpUrl);
     },
+    getPointInfoCTU: function() {
+      let timestamps = Math.floor(new Date().getTime() / 1000);
+      console.log(timestamps);
+      let mode = "phonghoc";
+      let value = "allpositioninmap";
+      let encryptDateTime = timestamps;
+      for (let i = 0; i < 5; i++) {
+        value = md5(value);
+        mode = md5(mode);
+      }
+
+      //Encrypt validate
+      let validate = "qlph." + value + encryptDateTime;
+      //console.log(validate);
+      for (let i = 0; i < 5; i++) {
+        validate = md5(validate);
+      }
+      console.log(timestamps);
+      return axios.get("/api/map", {
+          params: {
+            mode: mode,
+            value: value,
+            validate: validate,
+            time: timestamps,
+          },
+        });
+    },
+    pointOnSurface: findPointOnSurface,
     onMapPostCompose ({ vectorContext, frameState }) {
       if (!this.$refs.marker || !this.$refs.marker.$feature) return
       const feature = this.$refs.marker.$feature
