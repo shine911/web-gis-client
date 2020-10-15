@@ -56,7 +56,9 @@ Route::group(['middleware' => 'localization'], function () {
     Route::get("/sport-grounds", function(){
        return view('sportview');
     })->name('sport-view');
-
+    Route::get('/routing', function(){
+        return view('routing');
+    })->name('routing-view');
 });
 
 //i18n Settings

@@ -26,7 +26,7 @@
                         <ul class="nav nav-tabs">
                             <li class="nav-item"><a href="{{route('index')}}" class="nav-link">Bản đồ CTU</a></li>
                             <li class="nav-item"><a href="{{route('sport-view')}}" class="active nav-link">Sân Chơi</a></li>
-                            <li class="nav-item"><a class="nav-link">Tìm đường đi</a></li>
+                            <li class="nav-item"><a href="{{route('routing-view')}}" class="nav-link">Tìm đường đi</a></li>
                         </ul>
 
                         <div id="app" class="tab-content">

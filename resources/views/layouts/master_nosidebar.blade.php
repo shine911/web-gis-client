@@ -19,6 +19,7 @@
             width; 50px;
         }
     </style>
+    @yield('headerscripts')
 </head>
 
 <body>

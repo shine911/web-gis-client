@@ -24,7 +24,7 @@
                         <h5 class="card-title">Thông tin các lớp bản đồ</h5>
                         <div class="row">
                             <div class="col-lg-6 col-md-12">
-                                <form method="POST" action="/layers/create">
+                                <form method="POST" action="{{route('layers.create')}}">
                                     @csrf
                                     <div class="form-group">
                                         <label for="layer_name">Tên Layer</label>

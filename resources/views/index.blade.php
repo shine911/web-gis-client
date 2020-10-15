@@ -24,9 +24,9 @@
                     <div class="card-body">
                         <div class="card-title">{{__("message.map.title")}}</div>
                         <ul class="nav nav-tabs">
-                            <li class="nav-item"><a href="{{route('index')}}" class="active nav-link" data-toggle="tab" href="#default">Bản đồ CTU</a></li>
-                            <li class="nav-item"><a href="{{route('sport-view')}}"class="nav-link">Sân Chơi</a></li>
-                            <li class="nav-item"><a class="nav-link">Tìm đường đi</a></li>
+                            <li class="nav-item"><a href="{{route('index')}}" class="active nav-link">Bản đồ CTU</a></li>
+                            <li class="nav-item"><a href="{{route('sport-view')}}" class="nav-link">Sân Chơi</a></li>
+                            <li class="nav-item"><a href="{{route('routing-view')}}" class="nav-link">Tìm đường đi</a></li>
                         </ul>
 
                         <div id="app" class="tab-content">
