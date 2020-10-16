@@ -276,7 +276,7 @@ export default {
             //convert map to geom
             let geom = JSON.stringify(this.features[0].geometry.coordinates)
             this.form.geom = geom;
-            axios.put('/api/room/' + this.form.id,
+            axios.put('../../../api/room/' + this.form.id,
                 {
                     data: this.form,
                 }).then((_) => {
