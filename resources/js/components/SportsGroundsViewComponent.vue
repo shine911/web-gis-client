@@ -157,7 +157,6 @@ export default {
           this.features = geo.data.features;
           this.features.forEach(f => {
               let found = info.find(i => i.MADIADIEM === f.properties.diadiem);
-              console.log(found);
               if(found!=undefined){
                 f.properties.state = found.TRANGTHAI;
                 f.properties.activeName = found.TENHOATDONG;
@@ -165,8 +164,10 @@ export default {
               //
           })
       }));
+      
+    let ip = window.location.hostname;
     axios.get(
-        "http://localhost:8000/geoserver/ctu/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ctu%3Asports_grounds&maxFeatures=50&outputFormat=application%2Fjson"
+        `http://${ip}:8000/geoserver/ctu/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ctu%3Asports_grounds&maxFeatures=50&outputFormat=application%2Fjson`
       )
       .then((res) => {
         this.sportGrounds = res.data.features;
@@ -200,7 +201,8 @@ export default {
         return feature.values_.state === "NO"
     },
     getGeoJSON: function() {
-        return axios.get("http://localhost:8000/geoserver/ctu/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ctu%3Aextracurricular_points&maxFeatures=50&outputFormat=application%2Fjson");
+        let ip = window.location.hostname;
+        return axios.get(`http://${ip}:8000/geoserver/ctu/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ctu%3Aextracurricular_points&maxFeatures=50&outputFormat=application%2Fjson`);
     },
     getPointInfoCTU: function() {
       let dateTime = Math.floor(new Date().getTime() / 1000);

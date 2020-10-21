@@ -14,9 +14,11 @@ class RoomsController extends Controller
         //Get floor Url
         $floorObj = LayersModel::where("id", "=", $layerId)->firstOrFail();
 
-        $search = $request->has('search') ? $request->get('search') : '';
-        $room = Room::where('floor', '=', $floor)->orderBy('id')->paginate(10);
-
+        $search = $request->get('search')??'';
+        //search like
+        $match = [['floor', '=', $floor], ['roomnamevi', 'LIKE', "$search%"]];
+        $room = Room::where($match)->orderBy('id')->paginate(10);
+        
         $data = ["floor"=>$floorObj, "search"=>$search, "data"=>$room];
 
         return view("floor/index", $data);
