@@ -21,7 +21,7 @@
     </style>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgYIJ_notoMwRyPUsVJG-q_3lblcYDDd4&callback=initMap&libraries=&v=weekly"
+  src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API')}}&callback=initMap&libraries=&v=weekly"
         defer></script>
     <style type="text/css">
         /* Always set the map height explicitly to define the size of the div
