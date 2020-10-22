@@ -149,7 +149,7 @@
                       <li>Diện tích: {{ feature.properties.info.DIENTICH }}</li>
                       <li>Trạng thái: {{ feature.properties.info.TRANGTHAI }}</li>
                       <li>Tên hoạt động: {{ feature.properties.info.TENHOATDONG }}</li>
-                      <li>CSVC: {{ feature.properties.info.CSVC }}</li>
+                      <li><div class="csvc-info">CSVC: {{ feature.properties.info.CSVC }}</div></li>
                     </ul>
                     <ul v-else>
                       <li>Toà nhà: {{ feature.properties.building }}</li>
@@ -323,13 +323,33 @@ export default {
         listFloor[index] = listFloor[index].map(f => {
           f.properties.info = info.find( i => i.TENPHONG == f.properties.roomcode );
           if(f.properties.info === undefined){
-            f.properties.info ={ "TENPHONG": "103",
-                      "SUCCHUA": "Đang cập nhật...",
-                      "DIENTICH": "Đang cập nhật...",
-                      "CSVC": "Đang cập nhật...",
-                      "TRANGTHAI": "UPDATE",
-                      "TENHOATDONG": "Đang cập nhật..."
-                      }
+              
+              /**
+               * Optimize for testing we need define Lab code of CTU
+               * Labcode include 8 numbers
+               * EX: 05020102
+               * Regex: [0-9]{8}
+               * Author: Shine911
+               */
+              
+              var pattern = new RegExp("[0-9]{8}");
+              f.properties.info ={
+                  "TENPHONG": "Đang cập nhật",
+                  "SUCCHUA": "Đang cập nhật...",
+                  "DIENTICH": "Đang cập nhật...",
+                  "CSVC": "Đang cập nhật...",
+                  "TRANGTHAI": "UPDATE",
+                  "TENHOATDONG": "Đang cập nhật..."
+                }
+              //Checking pattern if true
+              if(pattern.test(f.properties.roomcode)){
+                app.getPointInfoCTU(f.properties.roomcode).then(res=>{
+                let i = res.data.original;
+                if(!!i.TENPHONG){
+                    f.properties.info = i;
+                }
+                });
+              }
           }
           return f;
         });
@@ -410,11 +430,13 @@ export default {
     getLayer: function(inpUrl){
       return axios.get(inpUrl);
     },
-    getPointInfoCTU: function() {
+    getPointInfoCTU: function(value) {
       let timestamps = Math.floor(new Date().getTime() / 1000);
-      console.log(timestamps);
+      //console.log(timestamps);
       let mode = "phonghoc";
-      let value = "allpositioninmap";
+      if(value===undefined){
+        value = "allpositioninmap";
+      }
       let encryptDateTime = timestamps;
       for (let i = 0; i < 5; i++) {
         value = md5(value);
@@ -500,5 +522,10 @@ export default {
   .card-header-icon {
     cursor: pointer;
   }
+}
+.csvc-info{
+  display: block;
+  height: 50px;
+  overflow: scroll;
 }
 </style>
