@@ -24,7 +24,7 @@
                     <div class="card-body">
                         <div class="card-title">Bản đồ ĐHCT</div>
                         <div id="app">
-                            <mapglobalview-component :user-hide-logic="false" url-water='@json($waterNetwork)' url-electric='@json($electricNetwork)' url='@json($floors)' url-dormity='@json($dormitories)'></mapglobalview-component>
+                            <mapglobalview-component :user-hide-logic="false" url-extra='@json($extra)' url-water='@json($waterNetwork)' url-electric='@json($electricNetwork)' url='@json($floors)' url-dormity='@json($dormitories)'></mapglobalview-component>
                         </div>
                     </div>
                 </div>
