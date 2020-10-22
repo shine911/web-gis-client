@@ -45,6 +45,7 @@
                                             <option value="1">Ký túc xá</option>
                                             <option value="2">Mạng lưới điện</option>
                                             <option value="3">Mạng lưới nước</option>
+                                            <option value="4">Tiện ích</option>
                                         </select>
                                     </div>
                                     <div class="form-group">

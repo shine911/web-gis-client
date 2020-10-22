@@ -45,6 +45,7 @@
                                             <option value="1" {{$layer->layer_type==1?'selected':''}}>Ký túc xá</option>
                                             <option value="2" {{$layer->layer_type==2?'selected':''}}>Mạng lưới điện</option>
                                             <option value="3" {{$layer->layer_type==3?'selected':''}}>Mạng lưới nước</option>
+                                            <option value="3" {{$layer->layer_type==4?'selected':''}}>Tiện ích</option>
                                         </select>
                                     </div>
                                     <div class="form-group">

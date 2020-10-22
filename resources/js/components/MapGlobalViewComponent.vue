@@ -1,6 +1,7 @@
 <template>
   <div>
-    <vl-map ref="map"
+    <vl-map
+      ref="map"
       style="height: 500px"
       class="map"
       @mounted="onMapMounted"
@@ -17,7 +18,8 @@
         <vl-source-osm :attributions="copyright"></vl-source-osm>
       </vl-layer-tile>
 
-      <vl-layer-vector render-mode="image"
+      <vl-layer-vector
+        render-mode="image"
         v-for="(feature, index) in listFloor"
         :key="`floor-${index}`"
         :z-index="index"
@@ -26,7 +28,7 @@
         <vl-source-vector
           v-if="showLogic[index]"
           :features.sync="feature"
-        ></vl-source-vector> 
+        ></vl-source-vector>
         <vl-style-box :condition="isRed" v-if="showLogic[index]">
           <vl-style-stroke :color="feature.color" :width="1"></vl-style-stroke>
           <vl-style-fill color="red"></vl-style-fill>
@@ -41,7 +43,8 @@
         </vl-style-box>
       </vl-layer-vector>
 
-      <vl-layer-vector render-mode="image"
+      <vl-layer-vector
+        render-mode="image"
         v-for="(feature, index) in listDormity"
         :key="`dormity-${index}`"
         :z-index="index"
@@ -50,14 +53,15 @@
         <vl-source-vector
           v-if="showLogicDormity[index]"
           :features.sync="feature.features"
-        ></vl-source-vector> 
+        ></vl-source-vector>
         <vl-style-box v-if="showLogicDormity[index]">
           <vl-style-stroke :color="feature.color" :width="1"></vl-style-stroke>
           <vl-style-fill color="white"></vl-style-fill>
         </vl-style-box>
       </vl-layer-vector>
 
-      <vl-layer-vector render-mode="image"
+      <vl-layer-vector
+        render-mode="image"
         v-for="(feature, index) in listElectricNetwork"
         :key="`electricNetwork-${index}`"
         :z-index="index"
@@ -66,13 +70,14 @@
         <vl-source-vector
           v-if="showLogicElectricNetwork[index]"
           :features.sync="feature.features"
-        ></vl-source-vector> 
+        ></vl-source-vector>
         <vl-style-box v-if="showLogicElectricNetwork[index]">
           <vl-style-stroke :color="feature.color" :width="1"></vl-style-stroke>
         </vl-style-box>
       </vl-layer-vector>
 
-      <vl-layer-vector render-mode="image"
+      <vl-layer-vector
+        render-mode="image"
         v-for="(feature, index) in listWaterNetwork"
         :key="`waterNetwork-${index}`"
         :z-index="index"
@@ -81,20 +86,53 @@
         <vl-source-vector
           v-if="showLogicWaterNetwork[index]"
           :features.sync="feature.features"
-        ></vl-source-vector> 
+        ></vl-source-vector>
         <vl-style-box v-if="showLogicWaterNetwork[index]">
           <vl-style-stroke :color="feature.color" :width="1"></vl-style-stroke>
         </vl-style-box>
       </vl-layer-vector>
-
+      
+      <vl-layer-vector
+        render-mode="image"
+        v-for="(feature, index) in listExtra"
+        :key="`extra-${index}`"
+        :z-index="index"
+        :id="`extra${index}`"
+      >
+        <vl-source-vector
+          v-if="showLogicExtra[index]"
+          :features.sync="feature.features"
+        ></vl-source-vector>
+      </vl-layer-vector>
+      
+      <!--
+      <vl-layer-tile v-for="(feature, index) in listExtra" 
+        :key="`extra-${index}`"
+        :z-index="index"
+        :id="`extra${index}`"
+      >
+        <vl-source-wms url="feature." layers="ctu:local_streets" :extParams="{ TILED: true }">
+        </vl-source-wms>
+      </vl-layer-tile>
+      -->
       <!-- My point Layer -->
       <!-- geolocation -->
-      <vl-geoloc @update:position="onUpdatePosition" >
+      <vl-geoloc @update:position="onUpdatePosition">
         <template slot-scope="geoloc">
-          <vl-feature ref="marker" :properties="{ start: Date.now(), duration: 2500 }" v-if="geoloc.position" id="position-feature">
+          <vl-feature
+            ref="marker"
+            :properties="{ start: Date.now(), duration: 2500 }"
+            v-if="geoloc.position"
+            id="position-feature"
+          >
             <vl-geom-point :coordinates="geoloc.position"></vl-geom-point>
             <vl-style-box>
-              <vl-style-icon src="./assets/images/marker.png" :scale="0.4" :anchor="[0.5, 0.95]" :size="[128, 128]"></vl-style-icon>
+              <vl-style-icon
+                src="./assets/images/marker.png"
+                :scale="0.4"
+                :anchor="[0.5, 0.95]"
+                :size="[128, 128]"
+              ></vl-style-icon>
             </vl-style-box>
           </vl-feature>
         </template>
@@ -147,17 +185,28 @@
                       <li>Tầng: {{ feature.properties.floor }}</li>
                       <li>Sức chứa: {{ feature.properties.info.SUCCHUA }}</li>
                       <li>Diện tích: {{ feature.properties.info.DIENTICH }}</li>
-                      <li>Trạng thái: {{ feature.properties.info.TRANGTHAI }}</li>
-                      <li>Tên hoạt động: {{ feature.properties.info.TENHOATDONG }}</li>
-                      <li><div class="csvc-info">CSVC: {{ feature.properties.info.CSVC }}</div></li>
+                      <li>
+                        Trạng thái: {{ feature.properties.info.TRANGTHAI }}
+                      </li>
+                      <li>
+                        Tên hoạt động: {{ feature.properties.info.TENHOATDONG }}
+                      </li>
+                      <li>
+                        <div class="csvc-info">
+                          CSVC: {{ feature.properties.info.CSVC }}
+                        </div>
+                      </li>
                     </ul>
-                    <ul v-else>
+                    <ul v-else-if="!!feature.properties.dormitoryzone">
                       <li>Toà nhà: {{ feature.properties.building }}</li>
                       <li>Khu: {{ feature.properties.dormitoryzone }}</li>
                       <li>Tầng: {{ feature.properties.floor }}</li>
                       <li>Sức chứa: {{ feature.properties.roomcapity }}</li>
                       <li>Diện tích: {{ feature.properties.roomarea }}</li>
                       <li>Hiện trạng: {{ feature.properties.state }}</li>
+                    </ul>
+                    <ul v-else>
+                      <li>{{ feature.properties }}</li>
                     </ul>
                   </div>
                 </div>
@@ -170,6 +219,7 @@
     </vl-map>
     <div>
       <ul class="vertical-nav-menu">
+          
         <li>
           <a href="#">
             <i class="metismenu-icon pe-7s-culture"></i>
@@ -177,7 +227,7 @@
             <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
           </a>
           <ul>
-            <li v-for="(value,index) in listUrl" :key="value.id">
+            <li v-for="(value, index) in listUrl" :key="value.id">
               <div class="position-relative form-check">
                 <label class="form-check-label"
                   ><input
@@ -219,7 +269,10 @@
             <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
           </a>
           <ul>
-            <li v-for="(value, index) in listUrlElectricNetwork" :key="value.id">
+            <li
+              v-for="(value, index) in listUrlElectricNetwork"
+              :key="value.id"
+            >
               <div class="position-relative form-check">
                 <label class="form-check-label"
                   ><input
@@ -232,11 +285,13 @@
               </div>
             </li>
           </ul>
-            <!-- Water network -->
-          <li v-if="listUrlWaterNetwork.length != 0">
+          <!-- Water network -->
+        </li>
+
+        <li v-if="listUrlWaterNetwork.length != 0">
           <a href="#">
             <i class="metismenu-icon pe-7s-drop"></i>
-            Mạng lưới nuowsc
+            Mạng lưới nước
             <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
           </a>
           <ul>
@@ -254,6 +309,30 @@
             </li>
           </ul>
         </li>
+
+        <li>
+          <a href="#">
+            <i class="metismenu-icon pe-7s-more"></i>
+            Tiện ích
+            <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+          </a>
+          <ul>
+            <li v-for="(value, index) in listUrlExtra" :key="value.id">
+              <div class="position-relative form-check">
+                <label class="form-check-label"
+                  ><input
+                    type="checkbox"
+                    class="form-check-input"
+                    v-model="showLogicExtra[index]"
+                  />
+                  {{ value.layer_name }}</label
+                >
+              </div>
+            </li>
+          </ul>
+        </li>
+        <!--Extra Options -->
+
       </ul>
     </div>
   </div>
@@ -267,7 +346,7 @@ import OverviewMap from "ol/control/OverviewMap";
 import ZoomSlider from "ol/control/ZoomSlider";
 import { findPointOnSurface, createStyle } from "vuelayers/lib/ol-ext";
 import md5 from "md5";
-const easeInOut = t => 1 - Math.pow(1 - t, 3);
+const easeInOut = (t) => 1 - Math.pow(1 - t, 3);
 
 export default {
   name: "MapGlobalView",
@@ -278,10 +357,12 @@ export default {
     urlElectric: String,
     urlWater: String,
     userHideLogic: Boolean,
+    urlExtra: String,
   },
   data() {
     return {
-      copyright: '&copy; <a href="https://www.ctu.edu.vn/" target="_blank">CTU WebGIS Project</a> contributors.',
+      copyright:
+        '&copy; <a href="https://www.ctu.edu.vn/" target="_blank">CTU WebGIS Project</a> contributors.',
       zoom: 16,
       center: [11774094.696107, 1122418.043939],
       rotation: 0,
@@ -296,6 +377,8 @@ export default {
       showLogicElectricNetwork: [],
       listWaterNetwork: [],
       showLogicWaterNetwork: [],
+      listExtra: [],
+      showLogicExtra: [],
       deviceCoordinate: undefined,
     };
   },
@@ -316,14 +399,14 @@ export default {
     this.listUrl.forEach(function (value, index) {
       //Process all CTU info and Layer info
       axios.all([app.getPointInfoCTU(), app.getLayer(value.url)]).then(
-        axios.spread((info, geo) => 
-      {
-        listFloor[index] = geo.data.features;
-        info = Object.values(info.data.original);
-        listFloor[index] = listFloor[index].map(f => {
-          f.properties.info = info.find( i => i.TENPHONG == f.properties.roomcode );
-          if(f.properties.info === undefined){
-              
+        axios.spread((info, geo) => {
+          listFloor[index] = geo.data.features;
+          info = Object.values(info.data.original);
+          listFloor[index] = listFloor[index].map((f) => {
+            f.properties.info = info.find(
+              (i) => i.TENPHONG == f.properties.roomcode
+            );
+            if (f.properties.info === undefined) {
               /**
                * Optimize for testing we need define Lab code of CTU
                * Labcode include 8 numbers
@@ -331,29 +414,30 @@ export default {
                * Regex: [0-9]{8}
                * Author: Shine911
                */
-              
+
               var pattern = new RegExp("[0-9]{8}");
-              f.properties.info ={
-                  "TENPHONG": "Đang cập nhật",
-                  "SUCCHUA": "Đang cập nhật...",
-                  "DIENTICH": "Đang cập nhật...",
-                  "CSVC": "Đang cập nhật...",
-                  "TRANGTHAI": "UPDATE",
-                  "TENHOATDONG": "Đang cập nhật..."
-                }
+              f.properties.info = {
+                TENPHONG: "Đang cập nhật",
+                SUCCHUA: "Đang cập nhật...",
+                DIENTICH: "Đang cập nhật...",
+                CSVC: "Đang cập nhật...",
+                TRANGTHAI: "UPDATE",
+                TENHOATDONG: "Đang cập nhật...",
+              };
               //Checking pattern if true
-              if(pattern.test(f.properties.roomcode)){
-                app.getPointInfoCTU(f.properties.roomcode).then(res=>{
-                let i = res.data.original;
-                if(!!i.TENPHONG){
+              if (pattern.test(f.properties.roomcode)) {
+                app.getPointInfoCTU(f.properties.roomcode).then((res) => {
+                  let i = res.data.original;
+                  if (!!i.TENPHONG) {
                     f.properties.info = i;
-                }
+                  }
                 });
               }
-          }
-          return f;
-        });
-      }));
+            }
+            return f;
+          });
+        })
+      );
       showLogic[index] = false;
     });
     //Dormity
@@ -399,21 +483,31 @@ export default {
       });
     }
 
+    //WaterNetwork
+    if (this.urlExtra !== undefined) {
+      let listExtra = this.listExtra;
+      let showLogicExtra = this.showLogicExtra;
+      this.listUrlExtra.forEach((value, index) => {
+        axios.get(value.url).then((res) => {
+          listExtra[index] = res.data;
+        });
+        showLogicExtra[index] = false;
+      });
+    }
     this.loading = false;
   },
   methods: {
-    isRed (feature, resolution) {
-        return feature.values_.info.TRANGTHAI === "YES";
+    isRed(feature, resolution) {
+      return feature.values_.info.TRANGTHAI === "YES";
     },
-    isGreen (feature, resolution) {
-        return feature.values_.info.TRANGTHAI === "NO";
+    isGreen(feature, resolution) {
+      return feature.values_.info.TRANGTHAI === "NO";
     },
-    isYellow (feature, resolution){
+    isYellow(feature, resolution) {
       return feature.values_.info.TRANGTHAI == "UPDATE";
-    }
-    ,
-    onUpdatePosition (coordinate) {
-      this.deviceCoordinate = coordinate
+    },
+    onUpdatePosition(coordinate) {
+      this.deviceCoordinate = coordinate;
     },
     onMapMounted() {
       // now ol.Map instance is ready and we can work with it directly
@@ -427,14 +521,14 @@ export default {
         new ZoomSlider(),
       ]);
     },
-    getLayer: function(inpUrl){
+    getLayer: function (inpUrl) {
       return axios.get(inpUrl);
     },
-    getPointInfoCTU: function(value) {
+    getPointInfoCTU: function (value) {
       let timestamps = Math.floor(new Date().getTime() / 1000);
       //console.log(timestamps);
       let mode = "phonghoc";
-      if(value===undefined){
+      if (value === undefined) {
         value = "allpositioninmap";
       }
       let encryptDateTime = timestamps;
@@ -452,39 +546,41 @@ export default {
       //console.log(timestamps);
 
       return axios.get("api/map", {
-          params: {
-            mode: mode,
-            value: value,
-            validate: validate,
-            time: timestamps,
-          },
-        });
+        params: {
+          mode: mode,
+          value: value,
+          validate: validate,
+          time: timestamps,
+        },
+      });
     },
     pointOnSurface: findPointOnSurface,
-    onMapPostCompose ({ vectorContext, frameState }) {
-      if (!this.$refs.marker || !this.$refs.marker.$feature) return
-      const feature = this.$refs.marker.$feature
-      if (!feature.getGeometry() || !feature.getStyle()) return
-      const flashGeom = feature.getGeometry().clone()
-      const duration = feature.get('duration')
-      const elapsed = frameState.time - feature.get('start')
-      const elapsedRatio = elapsed / duration
-      const radius = easeInOut(elapsedRatio) * 35 + 5
-      const opacity = easeInOut(1 - elapsedRatio)
-      const fillOpacity = easeInOut(0.5 - elapsedRatio)
-      vectorContext.setStyle(createStyle({
-        imageRadius: radius,
-        fillColor: [119, 170, 203, fillOpacity],
-        strokeColor: [119, 170, 203, opacity],
-        strokeWidth: 2 + opacity,
-      }))
-      vectorContext.drawGeometry(flashGeom)
-      vectorContext.setStyle(feature.getStyle()(feature)[0])
-      vectorContext.drawGeometry(feature.getGeometry())
+    onMapPostCompose({ vectorContext, frameState }) {
+      if (!this.$refs.marker || !this.$refs.marker.$feature) return;
+      const feature = this.$refs.marker.$feature;
+      if (!feature.getGeometry() || !feature.getStyle()) return;
+      const flashGeom = feature.getGeometry().clone();
+      const duration = feature.get("duration");
+      const elapsed = frameState.time - feature.get("start");
+      const elapsedRatio = elapsed / duration;
+      const radius = easeInOut(elapsedRatio) * 35 + 5;
+      const opacity = easeInOut(1 - elapsedRatio);
+      const fillOpacity = easeInOut(0.5 - elapsedRatio);
+      vectorContext.setStyle(
+        createStyle({
+          imageRadius: radius,
+          fillColor: [119, 170, 203, fillOpacity],
+          strokeColor: [119, 170, 203, opacity],
+          strokeWidth: 2 + opacity,
+        })
+      );
+      vectorContext.drawGeometry(flashGeom);
+      vectorContext.setStyle(feature.getStyle()(feature)[0]);
+      vectorContext.drawGeometry(feature.getGeometry());
       if (elapsed > duration) {
-        feature.set('start', Date.now())
+        feature.set("start", Date.now());
       }
-      this.$refs.map.render()
+      this.$refs.map.render();
     },
   },
   computed: {
@@ -510,6 +606,14 @@ export default {
       }
       return JSON.parse(this.urlWater);
     },
+    listUrlExtra: function () {
+      if (this.userHideLogic) {
+        return JSON.parse(this.urlExtra).filter(
+          (url) => url.user_hide == false
+        );
+      }
+      return JSON.parse(this.urlExtra);
+    },
   },
 };
 </script>
@@ -523,7 +627,7 @@ export default {
     cursor: pointer;
   }
 }
-.csvc-info{
+.csvc-info {
   display: block;
   height: 50px;
   overflow: scroll;

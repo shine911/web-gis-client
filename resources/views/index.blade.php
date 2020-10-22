@@ -30,7 +30,7 @@
                         </ul>
 
                         <div id="app" class="tab-content">
-                            <mapglobalview-component :user-hide-logic="true" url='@json($url)' url-dormity='@json($urlDormitys)'></mapglobalview-component>
+                            <mapglobalview-component :user-hide-logic="true" url-extra='@json($extra)' url='@json($url)' url-dormity='@json($urlDormitys)'></mapglobalview-component>
                         </div>
                     </div>
                 </div>
